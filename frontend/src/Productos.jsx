@@ -3,8 +3,8 @@ import {
   Card,
   Image,
   Text,
-  ProgressCircle,
   Center,
+  Spinner
 } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
 import { useState } from "react";
@@ -27,13 +27,8 @@ export default function Productos() {
   if (loading)
     return (
       <Center h="100vh" flexDirection="column" gap={4}>
-        <ProgressCircle.Root value={null} size="sm">
-          <ProgressCircle.Circle>
-            <ProgressCircle.Track />
-            <ProgressCircle.Range />
-          </ProgressCircle.Circle>
-        </ProgressCircle.Root>
-        <Text>Cargando productos...</Text>
+        <Spinner size="md"/>
+        <Text fontSize="sm">Cargando productos...</Text>
       </Center>
     );
 
