@@ -1,5 +1,6 @@
 import Productos from "./Productos";
 import AdminMenu from "./admin/AdminMenu";
+import Login from "./login/Login";
 import { BrowserRouter } from "react-router";
 import { Routes, Route } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/productos" element={<Productos />} />
         <Route path="/admin/productos" element={<AdminMenu />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

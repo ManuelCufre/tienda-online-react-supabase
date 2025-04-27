@@ -14,6 +14,25 @@ export default function useSupaBase() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    //crear un nuevo usuario
+    async function signUpNuevoUsuario(email) {
+        try {
+            const { data, error } = await supabase.auth.signInWithOtp({
+                email: email,
+                options: {
+                    emailRedirectTo: `${window.location.origin}/productos`
+                }
+            });
+            if (error) throw error;
+            return data;
+        } catch (error) {
+            setError(error.message);
+            throw error;
+        }
+        const { data: { user } } = await supabase.auth.getUser()
+
+    }
+
     const getProductos = async () => {
         try {
             const { data, error } = await supabase.from("productos").select();
@@ -26,11 +45,20 @@ export default function useSupaBase() {
         }
     }
 
+    const crearProducto = async (data) => {
+        try {
+            const { error } = await supabase.from("productos").insert([data]);
+            if (error) throw error;
+            getProductos();
+        } catch (error) {
+            setError(error.message);
+        }
+    }
+
     useEffect(() => {
         getProductos();
     }, []);
 
-    return (
-        {productos, loading, error, getProductos}
-    )
+    return {productos, loading, error, getProductos, supabase, crearProducto, signUpNuevoUsuario}
+    
 }
