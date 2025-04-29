@@ -2,6 +2,7 @@ import Productos from "./Productos";
 import AdminMenu from "./admin/AdminMenu";
 import Signup from "./login/Signup";
 import Login from "./login/Login";
+import Pedidos from "./pedidos/Pedidos";
 import { BrowserRouter } from "react-router";
 import useSupaBase from "./useSupaBase";
 import { Routes, Route, useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ function App() {
         <Route path="/admin/productos" element={<AdminMenu />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/pedidos" element={<Pedidos />} />
 
       </Routes>
     </BrowserRouter>

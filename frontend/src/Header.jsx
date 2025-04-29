@@ -7,6 +7,7 @@ import {
   EmptyState,
   VStack,
   Popover,
+  Dialog,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router";
 import { FaShoppingBag } from "react-icons/fa";
@@ -84,8 +85,6 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
           </Drawer.Root>
           {user ? (
             <div className="flex items-center gap-2">
-             
-
               <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
                 <Popover.Trigger asChild>
                   <FaUserCircle className="w-6 h-6" />
@@ -95,8 +94,37 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
                     <Popover.Content>
                       <Popover.Arrow />
                       <Popover.Body className="flex flex-col gap-2 p-4">
-                      <span>{user.email}</span>
-                      <Button onClick={() => cerrarSesion()}>Cerrar Sesión</Button>
+                        <span>{user.email}</span>
+
+                        <Dialog.Root size={"sm"} placement = 'center'>
+                          <Dialog.Trigger asChild>
+                            <Button>
+                              Cerrar Sesión
+                            </Button>
+                          </Dialog.Trigger>
+                          <Portal>
+                            <Dialog.Backdrop />
+                            <Dialog.Positioner>
+                              <Dialog.Content>
+                                <Dialog.Header>
+                                  
+                                </Dialog.Header>
+                                <Dialog.Body>
+                                  <p className="text-center">
+                                    ¿Estás seguro de que deseas cerrar sesión?
+                                  </p>
+                                </Dialog.Body>
+                                <Dialog.Footer>
+                                  <Dialog.ActionTrigger asChild>
+                                    <Button size='sm' variant="outline">Cancelar</Button>
+                                  </Dialog.ActionTrigger>
+                                  <Button size='sm' onClick={() => cerrarSesion()}>Aceptar</Button>
+                                </Dialog.Footer>
+                               
+                              </Dialog.Content>
+                            </Dialog.Positioner>
+                          </Portal>
+                        </Dialog.Root>
                       </Popover.Body>
                     </Popover.Content>
                   </Popover.Positioner>
