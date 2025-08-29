@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import { set } from "react-hook-form";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 if (!supabaseUrl || !supabaseKey) {
   throw new Error(
     "Las variables de entorno VITE_SUPABASE_URL y VITE_SUPABASE_KEY deben estar definidas"
@@ -31,17 +31,19 @@ export default function useSupaBase() {
   }, []);
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
-            setUser(session?.user || null);
-        }
-        if (event === 'SIGNED_OUT') {
-            setUser(null);
-        }
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_IN" || event === "INITIAL_SESSION") {
+        setUser(session?.user || null);
+      }
+      if (event === "SIGNED_OUT") {
+        setUser(null);
+      }
     });
 
     return () => subscription.unsubscribe();
-}, []);
+  }, []);
 
   //crear un nuevo usuario mail y contraseña
   async function crearUsuario(userData) {
@@ -53,7 +55,7 @@ export default function useSupaBase() {
           emailRedirectTo: `${window.location.origin}/productos`,
         },
       });
-      console.log('Usuario creado '+data);
+      console.log("Usuario creado " + data);
       if (error) throw error;
       return data;
     } catch (error) {
@@ -65,37 +67,37 @@ export default function useSupaBase() {
   //Iniciar sesion con email y contraseña
   async function iniciarSesionUsuario(userData) {
     try {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: userData.email,
-            password: userData.contraseña,
-            options: {
-              emailRedirectTo: `${window.location.origin}/productos`,
-            },
-          });
-        console.log('Usuario logeado ');
-        console.log(data.user.email);
-        if (error) throw error;
-        return data;
-    }catch (error) {
-        setError(error.message);
-        throw error;    
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: userData.email,
+        password: userData.contraseña,
+        options: {
+          emailRedirectTo: `${window.location.origin}/productos`,
+        },
+      });
+      console.log("Usuario logeado ");
+      console.log(data.user.email);
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      setError(error.message);
+      throw error;
     }
   }
 
   async function cerrarSesion() {
     try {
-        const { error } = await supabase.auth.signOut();
-        console.log('Cerraste la sesion ');
-        if (error) throw error;
-    }catch (error) {
-        setError(error.message);
-        throw error;    
+      const { error } = await supabase.auth.signOut();
+      console.log("Cerraste la sesion ");
+      if (error) throw error;
+    } catch (error) {
+      setError(error.message);
+      throw error;
     }
   }
 
   const getProductos = async () => {
     try {
-      const { data, error } = await supabase.from("productos").select();
+      const { data, error } = await supabase.from("Productos").select();
       if (error) throw error;
       setProductos(data || []);
     } catch (error) {

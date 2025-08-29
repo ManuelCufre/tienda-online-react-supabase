@@ -1,7 +1,6 @@
 import { Tabs } from "@chakra-ui/react";
 import { LuFolder, LuSquareCheck, LuUser } from "react-icons/lu";
 import AdminProductos from "./AdminProductos";
-import '../App.css';
 
 
 export default function AdminMenu() {

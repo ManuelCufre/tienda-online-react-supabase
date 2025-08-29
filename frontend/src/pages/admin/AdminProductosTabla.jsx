@@ -13,10 +13,8 @@ import {
 import { useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBack2Fill } from "react-icons/ri";
-import "../App.css";
 import { useForm } from "react-hook-form";
-import useSupaBase from "../useSupaBase";
-
+import useSupaBase from "@/hooks/useSupaBase";
 export default function AdminProductosTabla() {
   const [nuevoProducto, setNuevoProducto] = useState([]);
   const {
@@ -160,7 +158,7 @@ export default function AdminProductosTabla() {
               <Table.Row key={item.id}>
                 <Table.Cell>{item.id}</Table.Cell>
                 <Table.Cell>{item.nombre}</Table.Cell>
-                <Table.Cell>{item.descripción}</Table.Cell>
+                <Table.Cell>{item.descripcion}</Table.Cell>
                 <Table.Cell>$ {item.precio}</Table.Cell>
                 <Table.Cell>
                   <img src={item.imagen} alt="" className="w-10" />

@@ -1,10 +1,10 @@
-import Productos from "./Productos";
-import AdminMenu from "./admin/AdminMenu";
-import Signup from "./login/Signup";
-import Login from "./login/Login";
-import Pedidos from "./pedidos/Pedidos";
+import Productos from "./pages/productos/Productos";
+import AdminMenu from "./pages/admin/AdminMenu";
+import Signup from "./pages/auth/Signup";
+import Login from "./pages/auth/Login";
+import Pedidos from "./pages/pedidos/Pedidos";
 import { BrowserRouter } from "react-router";
-import useSupaBase from "./useSupaBase";
+import useSupaBase from "./hooks/useSupaBase";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import './App.css';

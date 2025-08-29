@@ -1,23 +1,16 @@
-import {
-  Button,
-  Card,
-  Image,
-  Text,
-  Center,
-  Spinner
-} from "@chakra-ui/react";
+import { Button, Card, Image, Text, Center, Spinner } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
 import { useState } from "react";
-import Header from "./Header";
-import "./App.css";
-import useSupaBase from "./useSupaBase";
+import Header from "@/components/layout/Header";
+import useSupaBase from "@/hooks/useSupaBase";
+import { useCart } from "@/context/CartContext";
 
 export default function Productos() {
-  const [productosAgregados, setProductosAgregados] = useState([]);
   const { productos, loading, error, getProductos } = useSupaBase();
+  const { agregarAlCarrito } = useCart();
 
   const handleAgregarCarrito = (producto) => {
-    setProductosAgregados([...productosAgregados, producto]);
+    agregarAlCarrito(producto);
     toaster.create({
       title: "✅ Producto agregado",
       description: `El producto ${producto.nombre} ha sido agregado al carrito`,
@@ -27,7 +20,7 @@ export default function Productos() {
   if (loading)
     return (
       <Center h="100vh" flexDirection="column" gap={4}>
-        <Spinner size="md"/>
+        <Spinner size="md" />
         <Text fontSize="sm">Cargando productos...</Text>
       </Center>
     );
@@ -35,8 +28,6 @@ export default function Productos() {
   return (
     <>
       <Header
-        productosAgregados={productosAgregados}
-        setProductosAgregados={setProductosAgregados}
       />
       <div className="productos-container">
         {productos.map((producto) => (
@@ -47,7 +38,7 @@ export default function Productos() {
             />
             <Card.Body gap="2">
               <Card.Title>{producto.nombre}</Card.Title>
-              <Card.Description>{producto.descripción}</Card.Description>
+              <Card.Description>{producto.descripcion}</Card.Description>
               <Text
                 textStyle="2xl"
                 fontWeight="medium"

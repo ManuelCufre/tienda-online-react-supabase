@@ -10,13 +10,12 @@ import {
   Dialog,
 } from "@chakra-ui/react";
 import { NavLink } from "react-router";
-import { FaShoppingBag } from "react-icons/fa";
-import ProductoAgregadoCarrito from "./ProductoAgregadoCarrito";
-import useSupaBase from "./useSupaBase";
+import Carrito from "./Carrito";
+import useSupaBase from "@/hooks/useSupaBase";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 
-export default function Header({ productosAgregados, setProductosAgregados }) {
+export default function Header() {
   const { cerrarSesion, user } = useSupaBase();
   const [open, setOpen] = useState(false);
 
@@ -35,54 +34,7 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
         </Tabs.Root>
 
         <div className="flex gap-4">
-          <Drawer.Root size="sm">
-            <Drawer.Trigger asChild>
-              <Button variant="outline" size="sm">
-                <FaShoppingBag />
-              </Button>
-            </Drawer.Trigger>
-            <Portal>
-              <Drawer.Backdrop />
-              <Drawer.Positioner>
-                <Drawer.Content>
-                  <Drawer.Header>
-                    <Drawer.Title>Carrito</Drawer.Title>
-                  </Drawer.Header>
-                  <Drawer.Body>
-                    {productosAgregados.length === 0 ? (
-                      <EmptyState.Root size="lg">
-                        <EmptyState.Content>
-                          <EmptyState.Indicator>
-                            <FaShoppingBag />
-                          </EmptyState.Indicator>
-                          <VStack textAlign="center">
-                            <EmptyState.Title>
-                              El carrito esta vacío
-                            </EmptyState.Title>
-                            <EmptyState.Description>
-                              Explore nuestros productos y agrega artículos a tu
-                              carrito
-                            </EmptyState.Description>
-                          </VStack>
-                        </EmptyState.Content>
-                      </EmptyState.Root>
-                    ) : (
-                      <ProductoAgregadoCarrito
-                        productosAgregados={productosAgregados}
-                        setProductosAgregados={setProductosAgregados}
-                      />
-                    )}
-                  </Drawer.Body>
-                  <Drawer.Footer>
-                    <Button>Realizar pedido</Button>
-                  </Drawer.Footer>
-                  <Drawer.CloseTrigger asChild>
-                    <CloseButton size="sm" />
-                  </Drawer.CloseTrigger>
-                </Drawer.Content>
-              </Drawer.Positioner>
-            </Portal>
-          </Drawer.Root>
+          <Carrito />
           {user ? (
             <div className="flex items-center gap-2">
               <Popover.Root open={open} onOpenChange={(e) => setOpen(e.open)}>
@@ -96,19 +48,15 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
                       <Popover.Body className="flex flex-col gap-2 p-4">
                         <span>{user.email}</span>
 
-                        <Dialog.Root size={"sm"} placement = 'center'>
+                        <Dialog.Root size={"sm"} placement="center">
                           <Dialog.Trigger asChild>
-                            <Button>
-                              Cerrar Sesión
-                            </Button>
+                            <Button>Cerrar Sesión</Button>
                           </Dialog.Trigger>
                           <Portal>
                             <Dialog.Backdrop />
                             <Dialog.Positioner>
                               <Dialog.Content>
-                                <Dialog.Header>
-                                  
-                                </Dialog.Header>
+                                <Dialog.Header></Dialog.Header>
                                 <Dialog.Body>
                                   <p className="text-center">
                                     ¿Estás seguro de que deseas cerrar sesión?
@@ -116,11 +64,17 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
                                 </Dialog.Body>
                                 <Dialog.Footer>
                                   <Dialog.ActionTrigger asChild>
-                                    <Button size='sm' variant="outline">Cancelar</Button>
+                                    <Button size="sm" variant="outline">
+                                      Cancelar
+                                    </Button>
                                   </Dialog.ActionTrigger>
-                                  <Button size='sm' onClick={() => cerrarSesion()}>Aceptar</Button>
+                                  <Button
+                                    size="sm"
+                                    onClick={() => cerrarSesion()}
+                                  >
+                                    Aceptar
+                                  </Button>
                                 </Dialog.Footer>
-                               
                               </Dialog.Content>
                             </Dialog.Positioner>
                           </Portal>
@@ -132,7 +86,7 @@ export default function Header({ productosAgregados, setProductosAgregados }) {
               </Popover.Root>
             </div>
           ) : (
-            <div>
+            <div className="flex gap-2">
               <NavLink to="/login">
                 <Button variant={"outline"}>Iniciar Sesión</Button>
               </NavLink>

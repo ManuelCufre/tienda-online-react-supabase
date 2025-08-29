@@ -1,7 +1,7 @@
 import { Button, Field, Input, Stack, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import useSupaBase from "../useSupaBase";
+import useSupaBase from "@/hooks/useSupaBase";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import {
   PasswordInput,
