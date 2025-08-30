@@ -4,6 +4,8 @@ import { useState } from "react";
 import Header from "@/components/layout/Header";
 import useSupaBase from "@/hooks/useSupaBase";
 import { useCart } from "@/context/CartContext";
+import { Link } from "react-router-dom";
+import AgregarCarrito from "./AgregarCarrito";
 
 export default function Productos() {
   const { productos, loading, error, getProductos } = useSupaBase();
@@ -27,8 +29,7 @@ export default function Productos() {
 
   return (
     <>
-      <Header
-      />
+      <Header />
       <div className="productos-container">
         {productos.map((producto) => (
           <Card.Root maxW="xs" overflow="hidden" key={producto.id}>
@@ -50,12 +51,14 @@ export default function Productos() {
             </Card.Body>
             <Card.Footer gap="2">
               <Toaster />
-              <Button
-                variant="solid"
-                onClick={() => handleAgregarCarrito(producto)}
+             <AgregarCarrito producto={producto}/>
+              <Link
+                to={`/producto/${producto.id}`}
+                key={producto.id}
+                style={{ textDecoration: "none" }}
               >
-                Agregar al carrito
-              </Button>
+                <Button variant={"ghost"}>Mas info</Button>
+              </Link>
             </Card.Footer>
           </Card.Root>
         ))}

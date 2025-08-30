@@ -117,6 +117,22 @@ export default function useSupaBase() {
     }
   };
 
+const getProductoPorId = async (id) => {
+  try {
+    const { data, error } = await supabase
+      .from("Productos")
+      .select()
+      .eq("id", id)
+      .single();
+    
+    if (error) throw error;
+    return data;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+};
+
   useEffect(() => {
     getProductos();
   }, []);
@@ -126,6 +142,7 @@ export default function useSupaBase() {
     loading,
     error,
     getProductos,
+    getProductoPorId,
     supabase,
     crearProducto,
     crearUsuario,
