@@ -1,4 +1,4 @@
-import { Children, createContext, useContext, useReducer, useEffect } from "react";
+import { Children, createContext, useContext, useReducer, useEffect, useState } from "react";
 
 const CartContext = createContext();
 
@@ -87,6 +87,7 @@ const cartReducer = (state, action) => {
 
 export const CartProvider = ({children}) => {
     const [state, dispatch] = useReducer(cartReducer, getInitialCart());
+    const [isCarritoOpen, setIsCarritoOpen] = useState(false);
 
     // Sincronizar cuando cambia el estado
     useEffect(() => {
@@ -126,6 +127,8 @@ export const CartProvider = ({children}) => {
         vaciarCarrito,
         totalItems,
         totalPrecio,
+        isCarritoOpen, 
+        setIsCarritoOpen
     }
 
     return (

@@ -11,13 +11,45 @@ import ProductoAgregadoCarrito from "@/pages/productos/ProductoAgregadoCarrito";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 export default function Carrito() {
-  const { items, totalPrecio, eliminarDelCarrito, VaciarCarrito } = useCart();
+  const {
+    items,
+    totalPrecio,
+    eliminarDelCarrito,
+    VaciarCarrito,
+    isCarritoOpen,
+    setIsCarritoOpen,
+  } = useCart();
 
   return (
-    <Drawer.Root size="sm">
+    <Drawer.Root
+      size="sm"
+      open={isCarritoOpen}
+      onOpenChange={({ open }) => setIsCarritoOpen(open)}
+    >
       <Drawer.Trigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="ghost" size="sm" position="relative">
           <FaShoppingBag />
+          {items.length > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: 1,
+                right: 1,
+                background: "#444444",
+                color: "white",
+                borderRadius: "50%",
+                width: 18,
+                height: 18,
+                fontSize: 10,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 1,
+              }}
+            >
+              {items.length}
+            </span>
+          )}
         </Button>
       </Drawer.Trigger>
       <Portal>
@@ -44,12 +76,12 @@ export default function Carrito() {
                   </EmptyState.Content>
                 </EmptyState.Root>
               ) : (
-                <ProductoAgregadoCarrito/>
+                <ProductoAgregadoCarrito />
               )}
             </Drawer.Body>
             <Drawer.Footer>
               <Link to="/pedidos">
-                <Button>Realizar pedido</Button>
+                <Button>Finalizar compra</Button>
               </Link>
             </Drawer.Footer>
             <Drawer.CloseTrigger asChild>

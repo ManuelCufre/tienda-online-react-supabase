@@ -13,10 +13,10 @@ export default function Productos() {
 
   const handleAgregarCarrito = (producto) => {
     agregarAlCarrito(producto);
-    toaster.create({
-      title: "✅ Producto agregado",
-      description: `El producto ${producto.nombre} ha sido agregado al carrito`,
-    });
+   // toaster.create({
+   //   title: "✅ Producto agregado",
+   //   description: `El producto ${producto.nombre} ha sido agregado al carrito`,
+   // });
   };
 
   if (loading)

@@ -19,11 +19,10 @@ export default function ProductoAgregadoCarrito() {
 
   const handleEliminarCarrito = (producto) => {
     eliminarDelCarrito(producto.id);
-    console.log(producto.id);
-    toaster.create({
-      title: "❌ Producto eliminado",
-      description: `El producto ${producto.nombre} ha sido eliminado del carrito`,
-    });
+   // toaster.create({
+   //   title: "❌ Producto eliminado",
+   //   description: `El producto ${producto.nombre} ha sido eliminado del carrito`,
+   // });
   };
  
   return (
