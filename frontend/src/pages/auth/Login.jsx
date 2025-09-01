@@ -54,7 +54,7 @@ export default function Login() {
         </Field.Root>
         <Field.Root invalid={!!errors.lastName}>
           <Field.Label>Contraseña</Field.Label>
-          <PasswordInput type="password" {...register("contraseña")} />
+          <PasswordInput type="password" {...register("password")} />
         </Field.Root>
         <Button type="submit">Iniciar Sesión</Button>
         <Text color={"red.500"}>{errorLogin}</Text>

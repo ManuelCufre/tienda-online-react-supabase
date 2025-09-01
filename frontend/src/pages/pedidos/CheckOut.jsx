@@ -7,6 +7,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaTruck } from "react-icons/fa";
 import { Input } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
 
 export default function CheckOut() {
   const {
@@ -17,10 +18,17 @@ export default function CheckOut() {
     decrementarCantidadCarrito,
   } = useCart();
   return (
-    <div className="flex flex-col gap-20 items-center">
+    <div className="flex flex-col items-center">
       <Header />
-      <div className="w-[65vw] flex gap-4  justify-between">
-        <div className="flex flex-col w-[65%]">
+
+      <div className="w-[65vw] flex gap-4  justify-between relative top-20">
+        <div className="flex flex-col w-[65%] relative bottom-10">
+          <Link to="/productos">
+          <Button variant={"ghost"} className="self-start relative bottom-6">
+            <MdOutlineKeyboardBackspace />
+            Seguir comprando
+          </Button>
+          </Link>
           <div className="flex ">
             <span className="!text-sm w-[35%] text-gray-600 text-center !font-semibold">
               Producto
@@ -93,6 +101,7 @@ export default function CheckOut() {
             ))}
           </div>
         </div>
+        
         <div className="flex flex-col w-[35%] relative top-5">
           <div className="!border !w-full rounded-lg">
             <div className="!p-6">
@@ -120,7 +129,9 @@ export default function CheckOut() {
             <div className="flex flex-col justify-between gap-2 !p-4">
               <Button>Iniciar pago</Button>
               <Link to="/productos">
-                <Button variant={"ghost"} className="w-full">Seguir comprando</Button>
+                <Button variant={"ghost"} className="w-full">
+                  Seguir comprando
+                </Button>
               </Link>
             </div>
           </div>

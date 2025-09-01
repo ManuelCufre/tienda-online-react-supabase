@@ -16,6 +16,9 @@ export default function AgregarCarrito({ producto }) {
 
   const handleAgregar = () => {
     agregarAlCarrito({ ...producto, talle: talleSeleccionado });
+    if(!talleSeleccionado){
+        return
+    }
     setIsCarritoOpen(true);
     setIsOpen(false); // Cierra el dialog
   };

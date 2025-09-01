@@ -69,7 +69,7 @@ export default function useSupaBase() {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: userData.email,
-        password: userData.contraseña,
+        password: userData.password,
         options: {
           emailRedirectTo: `${window.location.origin}/productos`,
         },
@@ -95,6 +95,21 @@ export default function useSupaBase() {
     }
   }
 
+  const getPerfil = async (userId) => {
+    try {
+      const { data, error } = await supabase
+        .from("Perfiles")
+        .select("rol")
+        .eq("id", '416bf442-faf5-4753-8956-172d786b3050')
+        .single();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      setError(error.message);
+      throw error;
+    }
+  };
+
   const getProductos = async () => {
     try {
       const { data, error } = await supabase.from("Productos").select();
@@ -117,21 +132,21 @@ export default function useSupaBase() {
     }
   };
 
-const getProductoPorId = async (id) => {
-  try {
-    const { data, error } = await supabase
-      .from("Productos")
-      .select()
-      .eq("id", id)
-      .single();
-    
-    if (error) throw error;
-    return data;
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
-};
+  const getProductoPorId = async (id) => {
+    try {
+      const { data, error } = await supabase
+        .from("Productos")
+        .select()
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     getProductos();
@@ -149,5 +164,6 @@ const getProductoPorId = async (id) => {
     iniciarSesionUsuario,
     user,
     cerrarSesion,
+    getPerfil
   };
 }
