@@ -20,8 +20,7 @@ export default function CheckOut() {
   return (
     <div className="flex flex-col items-center">
       <Header />
-
-      <div className="w-[65vw] flex gap-4  justify-between relative top-20">
+      <div className="w-[65vw] flex gap-4  justify-between relative top-44 ">
         <div className="flex flex-col w-[65%] relative bottom-10">
           <Link to="/productos">
           <Button variant={"ghost"} className="self-start relative bottom-6">

@@ -28,9 +28,10 @@ export default function Productos() {
     );
 
   return (
-    <>
+    <div className="flex flex-col items-center max-w-[100vw] ">
       <Header />
-      <div className="productos-container">
+      <div className="max-w-[65vw] flex  justify-center relative top-34">
+        <div className="grid grid-cols-4 gap-4 ">
         {productos.map((producto) => (
           <Card.Root maxW="xs" overflow="hidden" key={producto.id}>
             <Image
@@ -63,6 +64,7 @@ export default function Productos() {
           </Card.Root>
         ))}
       </div>
-    </>
+      </div>
+    </div>
   );
 }

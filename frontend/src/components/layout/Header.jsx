@@ -12,9 +12,8 @@ export default function Header() {
   const { user } = useSupaBase();
 
   return (
-    <>
-      <div className="min-w-screen h-20 !shadow-sm flex items-center justify-center">
-        <div className="flex items-center justify-between w-[70vw]">
+      <div className="w-full h-20 !shadow-sm flex items-center justify-center fixed z-1000 bg-white">
+        <div className="flex items-center justify-between w-[65vw] z-1000">
         <div className="">
           <h1 className="!font-bold ">Tienda online</h1>
         </div>
@@ -38,6 +37,5 @@ export default function Header() {
         </div>
         </div>
       </div>
-    </>
   );
 }

@@ -8,15 +8,15 @@ export default function MenuDeUsuario() {
   const [rol, setRol] = useState(null);
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchPerfil = async () => {
-      if (user) {
-        const data = await getPerfil(user.id);
-        setRol(data?.rol);
-      }
-    };
-    fetchPerfil();
-  }, [user]);
+  //useEffect(() => {
+  //  const fetchPerfil = async () => {
+  //    if (user) {
+  //      const data = await getPerfil(user.id);
+  //      setRol(data?.rol);
+  //    }
+  //  };
+  //  fetchPerfil();
+  //}, [user]);
 
   return (
     <>

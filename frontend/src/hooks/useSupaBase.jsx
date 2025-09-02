@@ -122,15 +122,26 @@ export default function useSupaBase() {
     }
   };
 
+  const actualizarProductos = async () => {
+  await getProductos();
+};
+
   const crearProducto = async (data) => {
-    try {
-      const { error } = await supabase.from("productos").insert([data]);
-      if (error) throw error;
-      getProductos();
-    } catch (error) {
-      setError(error.message);
-    }
-  };
+  try {
+    const { data: result, error } = await supabase
+      .from("Productos")  
+      .insert([data])
+      .select();  
+
+    if (error) throw error;
+    
+    await getProductos();
+    return result;
+  } catch (error) {
+    setError(error.message);
+    throw error;
+  }
+};
 
   const getProductoPorId = async (id) => {
     try {
@@ -158,6 +169,7 @@ export default function useSupaBase() {
     error,
     getProductos,
     getProductoPorId,
+    actualizarProductos,
     supabase,
     crearProducto,
     crearUsuario,

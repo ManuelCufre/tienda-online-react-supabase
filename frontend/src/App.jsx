@@ -1,5 +1,5 @@
 import Productos from "./pages/productos/Productos";
-import AdminMenu from "./pages/admin/AdminMenu";
+import ContenedorProductos from "./pages/admin/admin-productos/ContenedorProductos";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import CheckOut from "./pages/pedidos/CheckOut";
@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/productos" element={<Productos />} />
         <Route path="/producto/:id" element={<DetalleProducto />} />
-        <Route path="/admin/productos" element={<AdminMenu />} />
+        <Route path="/admin/productos" element={<ContenedorProductos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/pedidos" element={<CheckOut />} />
