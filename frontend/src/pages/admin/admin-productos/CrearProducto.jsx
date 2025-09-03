@@ -11,7 +11,7 @@ import {
   NativeSelect, // Añadir useToast para notificaciones
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useProductos } from "@/hooks/useProductos";
 import { useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -57,15 +57,17 @@ const campos = [
 ];
 
 export default function CrearProducto() {
-  const { loading, error, crearProducto, actualizarProductos  } = useSupaBase();
-  const [isOpen, setIsOpen] = useState(false); // Estado para controlar la visibilidad del modal
+  const { loading, error, crearProducto } = useProductos();
+  const [isOpen, setIsOpen] = useState(false);
   const [estado, setEstado] = useState(true);
+
+  if (error) return toast.error(error.message);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset, // Función para resetear el formulario
+    reset,
   } = useForm();
 
   const handleEstadoChange = () => {
@@ -86,21 +88,19 @@ export default function CrearProducto() {
 
     try {
       await crearProducto(processedData);
-      await actualizarProductos();
       setIsOpen(false);
       reset();
       toast.success("Producto creado con exito!");
     } catch (error) {
       console.error("Error al crear el producto:", error);
-
-      toast.error("Error al crear el producto");
+      return toast.error(error.message);
     }
   };
 
-  const handleCerar = () =>{
-    reset()
-    setIsOpen(false)
-  }
+  const handleCerrar = () => {
+    reset();
+    setIsOpen(false);
+  };
   return (
     <div className="w-full flex items-center justify-center">
       <Toaster position="bottom-right" reverseOrder={false} />
@@ -169,6 +169,7 @@ export default function CrearProducto() {
                             <Input
                               type={campo.type}
                               autoComplete="off"
+                              min={0}
                               placeholder={campo.placeholder || campo.label}
                               {...register(campo.name, {
                                 required: campo.required,
@@ -186,14 +187,11 @@ export default function CrearProducto() {
                   </Dialog.Body>
                   <Dialog.Footer>
                     {/* Botón para cerrar el modal */}
-                    <Button variant="outline" onClick={handleCerar}>
+                    <Button variant="outline" onClick={handleCerrar}>
                       Cancelar
                     </Button>
-                    <Button
-                      type="submit"
-                      isLoading={loading} // Mostrar estado de carga
-                    >
-                      Aceptar
+                    <Button type="submit">
+                      {loading ? "Cargando" : "Aceptar"}
                     </Button>
                   </Dialog.Footer>
                 </form>

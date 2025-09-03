@@ -1,10 +1,10 @@
 import { Button, Portal, Popover, Dialog } from "@chakra-ui/react";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useAuth } from "@/hooks/useAuth";
 import { FaUserCircle } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function MenuDeUsuario() {
-  const { cerrarSesion, user, getPerfil } = useSupaBase();
+  const { cerrarSesion, user} = useAuth();
   const [rol, setRol] = useState(null);
   const [open, setOpen] = useState(false);
 

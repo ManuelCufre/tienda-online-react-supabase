@@ -1,24 +1,21 @@
 import { Button, Card, Image, Text, Center, Spinner } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
-import useSupaBase from "@/hooks/useSupaBase";
 import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
 import AgregarCarrito from "./AgregarCarrito";
+import { useProductos } from "@/hooks/useProductos";
 
 export default function Productos() {
-  const { productos, loading, error, getProductos } = useSupaBase();
+  const { productos, loading, error, productosActivos } = useProductos();
   const { agregarAlCarrito } = useCart();
 
   const handleAgregarCarrito = (producto) => {
     agregarAlCarrito(producto);
-   // toaster.create({
-   //   title: "✅ Producto agregado",
-   //   description: `El producto ${producto.nombre} ha sido agregado al carrito`,
-   // });
   };
 
+  
   if (loading)
     return (
       <Center h="100vh" flexDirection="column" gap={4}>
@@ -27,12 +24,19 @@ export default function Productos() {
       </Center>
     );
 
+     if (error)
+    return (
+      <Center h="100vh" flexDirection="column" gap={4}>
+        <span>{error}</span>
+      </Center>
+    );
+
   return (
     <div className="flex flex-col items-center max-w-[100vw] ">
       <Header />
       <div className="max-w-[65vw] flex  justify-center relative top-34">
         <div className="grid grid-cols-4 gap-4 ">
-        {productos.map((producto) => (
+        {productosActivos.map((producto) => (
           <Card.Root maxW="xs" overflow="hidden" key={producto.id}>
             <Image
               src={producto.imagen}

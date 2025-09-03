@@ -1,5 +1,4 @@
 import HeaderAdmin from "@/components/layout/HeaderAdmin";
-import TablaProductos from "./TablaProductos";
 import CrearProducto from "./CrearProducto";
 import DataTableProductos from "./DataTableProductos";
 export default function ContenedorProductos() {

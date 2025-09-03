@@ -8,7 +8,6 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
-import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoAdd } from "react-icons/io5";
@@ -19,10 +18,6 @@ export default function ProductoAgregadoCarrito() {
 
   const handleEliminarCarrito = (producto) => {
     eliminarDelCarrito(producto.id);
-   // toaster.create({
-   //   title: "❌ Producto eliminado",
-   //   description: `El producto ${producto.nombre} ha sido eliminado del carrito`,
-   // });
   };
  
   return (

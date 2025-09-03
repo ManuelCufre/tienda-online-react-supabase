@@ -1,5 +1,4 @@
 import { Button, CloseButton, Dialog, Portal, Image } from "@chakra-ui/react";
-import useSupaBase from "@/hooks/useSupaBase";
 import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
 import { useState } from "react";

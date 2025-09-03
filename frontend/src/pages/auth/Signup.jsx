@@ -1,7 +1,7 @@
 import { Button, Field, Input, Stack, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import {
   PasswordInput,
@@ -10,7 +10,7 @@ import {
 
 export default function Signup() {
   const navigate = useNavigate();
-  const { crearUsuario, user } = useSupaBase();
+  const { crearUsuario, user } = useAuth();
   const [errorSignup, setErrorSignup] = useState(null);
   useEffect(() => {
     if (user) {

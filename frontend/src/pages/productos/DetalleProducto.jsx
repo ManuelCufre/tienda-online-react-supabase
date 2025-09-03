@@ -1,41 +1,40 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useProductos } from "@/hooks/useProductos";
 import { Image, IconButton, Button } from "@chakra-ui/react";
 
 import Header from "@/components/layout/Header";
 export default function DetalleProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getProductoPorId, loading } = useSupaBase();
+  const { productoQuery, loading } = useProductos();
   const { agregarAlCarrito } = useCart();
   const [producto, setProducto] = useState(null);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const cargarProducto = async () => {
-      if (!id) {
-        navigate("/productos");
-        return;
-      }
-
-      const productoData = await getProductoPorId(id);
-
-      if (isMounted && productoData) {
-        setProducto(productoData);
-      } else if (isMounted) {
-        navigate("/productos");
-      }
-    };
-
-    cargarProducto();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [id, getProductoPorId, navigate]);
+  //useEffect(() => {
+  //  let isMounted = true;
+//
+  //  const cargarProducto = async () => {
+  //    if (!id) {
+  //      navigate("/productos");
+  //      return;
+  //    }
+//
+//
+  //    if (isMounted && productoData) {
+  //      setProducto(productoData);
+  //    } else if (isMounted) {
+  //      navigate("/productos");
+  //    }
+  //  };
+//
+  //  cargarProducto();
+//
+  //  return () => {
+  //    isMounted = false;
+  //  };
+  //}, [id, productoQuery, navigate]);
 
   return (
     <div className="flex flex-col gap-20 items-center">

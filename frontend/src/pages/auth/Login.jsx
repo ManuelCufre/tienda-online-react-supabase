@@ -1,7 +1,7 @@
 import { Button, Field, Input, Stack, Text } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import {
   PasswordInput,
@@ -11,7 +11,7 @@ import {
 export default function Login() {
   const [errorLogin, setErrorLogin] = useState(null);
   const navigate = useNavigate();
-  const { iniciarSesionUsuario, user } = useSupaBase();
+  const { iniciarSesion, user } = useAuth();
 
   useEffect(() => {
     if (user) {
@@ -28,7 +28,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       setErrorLogin(null);
-      await iniciarSesionUsuario(data);
+      await iniciarSesion(data);
     } catch (error) {
       setErrorLogin(error.message);
     }

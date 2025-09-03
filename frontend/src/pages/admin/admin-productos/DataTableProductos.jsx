@@ -1,11 +1,11 @@
 import DataTable from "react-data-table-component";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useProductos } from "@/hooks/useProductos";
 import { IconButton } from "@chakra-ui/react";
 import { Spinner, Text, Flex } from "@chakra-ui/react";
 import EditarProducto from "./EditarProducto";
 export default function DataTableProductos() {
   const { productos, loading, error, getProductos, crearProducto } =
-    useSupaBase();
+    useProductos();
 
   const columnas = [
     { name: "Id", selector: (row) => row.id, sortable: true, maxWidth: "8px" },
@@ -73,6 +73,13 @@ export default function DataTableProductos() {
     },
   ];
 
+  if(loading) return (
+      <div className="min-w-full h-[50vh] flex items-center justify-center gap-2">
+        <Spinner color="colorPalette.600" />
+        <Text color="colorPalette.600" fontWeight={'bold'}>Cargando...</Text>
+      </div>
+  )
+
   function MostrarLoading()  {
     return (
       <div className="min-w-full min-h-[40vh] flex items-center justify-center gap-2">
@@ -84,14 +91,15 @@ export default function DataTableProductos() {
 
   const data = productos;
   return (
-    <div className="flex justify-center min-h-[30vh]">
+    <div className="flex justify-center ">
       <div className="w-[80vw] min-h-full !border">
         <DataTable
           columns={columnas}
           data={productos}
           pagination
-          progressPending={loading}
-          progressComponent={<MostrarLoading />}
+          paginationPerPage={15}
+          //progressPending={loading}
+          //progressComponent={<MostrarLoading />}
         />
       </div>
     </div>

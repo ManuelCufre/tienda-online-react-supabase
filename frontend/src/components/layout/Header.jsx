@@ -3,13 +3,13 @@ import {
 } from "@chakra-ui/react";
 import { NavLink } from "react-router";
 import Carrito from "./Carrito";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useAuth } from "@/hooks/useAuth";
 import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import MenuDeUsuario from "./MenuDeUsuario";
 export default function Header() {
   
-  const { user } = useSupaBase();
+  const { user } = useAuth();
 
   return (
       <div className="w-full h-20 !shadow-sm flex items-center justify-center fixed z-1000 bg-white">

@@ -4,7 +4,6 @@ import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import CheckOut from "./pages/pedidos/CheckOut";
 import { BrowserRouter } from "react-router";
-import useSupaBase from "./hooks/useSupaBase";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import DetalleProducto from "./pages/productos/DetalleProducto";
 

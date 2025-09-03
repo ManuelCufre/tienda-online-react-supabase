@@ -11,11 +11,12 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import useSupaBase from "@/hooks/useSupaBase";
+import { useProductos } from "@/hooks/useProductos";
 import { useState } from "react";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 const campos = [
   { label: "Nombre", name: "nombre", type: "text", required: true },
@@ -58,11 +59,15 @@ const campos = [
 
 export default function EditarProducto({ producto }) {
   const [estado, setEstado] = useState(producto.activo);
+  const [isOpen, setIsOpen] = useState(false);
+  const { modificarProducto, loading, error } = useProductos();
 
-  const { updateProduct, loading, error } = useSupaBase();
+  if (error) return toast.error(error.message);
+
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: producto,
@@ -78,15 +83,52 @@ export default function EditarProducto({ producto }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data)
-      // Aquí podrías cerrar el diálogo o mostrar un mensaje de éxito
+      console.log("Datos recibidos:", data);
+
+      let tallesArray;
+
+      if (typeof data.talles_disponibles === "string") {
+        tallesArray = data.talles_disponibles
+          .split(",")
+          .map((t) => Number(t.trim()))
+          .filter((t) => !isNaN(t));
+      } else if (Array.isArray(data.talles_disponibles)) {
+        tallesArray = data.talles_disponibles;
+      } else {
+        tallesArray = [];
+      }
+
+      const { id, ...datosSinId } = data;
+      const datosActualizados = {
+        ...datosSinId,
+        talles_disponibles: tallesArray,
+        activo: estado,
+      };
+
+      console.log("Datos a enviar:", { id, datosActualizados });
+
+      await modificarProducto({ id, datosActualizados });
+      toast.success("Producto modificado con éxito!");
+      setIsOpen(false);
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
+      toast.error(error.message);
     }
   };
 
+  const handleCerrar = () => {
+    reset();
+    setIsOpen(false);
+  };
+
   return (
-    <Dialog.Root size="xl" placement={"center"}>
+    <Dialog.Root
+      size="xl"
+      placement={"center"}
+      open={isOpen}
+      onOpenChange={(e) => setIsOpen(e.open)}
+    >
+      <Toaster position="bottom-right" reverseOrder={false} />
       <Dialog.Trigger asChild>
         <IconButton variant={"ghost"} size={"md"}>
           <FaRegEdit />
@@ -109,11 +151,19 @@ export default function EditarProducto({ producto }) {
                         <NativeSelect.Root
                           size="sm"
                           width="full"
-                          {...register(campo.name, {
-                            required: campo.required,
-                          })}
+                          value={
+                            watch(campo.name) || producto[campo.name] || ""
+                          }
+                          onValueChange={(e) => {
+                            setValue(campo.name, e.value);
+                          }}
                         >
-                          <NativeSelect.Field placeholder="Seleccione una opcion">
+                          <NativeSelect.Field
+                            placeholder="Seleccione una opcion"
+                            {...register(campo.name, {
+                              required: campo.required,
+                            })}
+                          >
                             {campo.options.map((opt) => (
                               <option key={opt} value={opt}>
                                 {opt}
@@ -131,16 +181,16 @@ export default function EditarProducto({ producto }) {
                           <Checkbox.HiddenInput {...register(campo.name)} />
                           <Checkbox.Control />
                           {estado === true ? (
-                          <Checkbox.Label>Activo</Checkbox.Label>
-
-                          ): (
-                          <Checkbox.Label>Inactivo</Checkbox.Label>
-
+                            <Checkbox.Label>Activo</Checkbox.Label>
+                          ) : (
+                            <Checkbox.Label>Inactivo</Checkbox.Label>
                           )}
                         </Checkbox.Root>
                       ) : (
                         <Input
                           type={campo.type}
+                          min={0}
+                          autoComplete="off"
                           placeholder={campo.placeholder || campo.label}
                           {...register(campo.name, {
                             required: campo.required,
@@ -158,7 +208,7 @@ export default function EditarProducto({ producto }) {
               </Dialog.Body>
               <Dialog.Footer>
                 <Dialog.ActionTrigger asChild>
-                  <Button variant="outline">Cancelar</Button>
+                  <Button variant="outline" onClick={handleCerrar}>Cancelar</Button>
                 </Dialog.ActionTrigger>
                 <Button type="submit" isLoading={loading}>
                   {loading ? "Guardando..." : "Aceptar"}
