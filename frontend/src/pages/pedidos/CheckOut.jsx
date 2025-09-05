@@ -8,7 +8,7 @@ import { FaTruck } from "react-icons/fa";
 import { Input } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
-
+import { useState } from "react";
 export default function CheckOut() {
   const {
     items,
@@ -17,52 +17,69 @@ export default function CheckOut() {
     aumentarCantidadCarrito,
     decrementarCantidadCarrito,
   } = useCart();
+
+  const [costoEnvio, setCostoEnvio] = useState(0)
+
+  const handleCalcular = () => {
+    setCostoEnvio(9800)
+  };
   return (
     <div className="flex flex-col items-center">
       <Header />
       <div className="w-[65vw] flex gap-4  justify-between relative top-44 ">
         <div className="flex flex-col w-[65%] relative bottom-10">
           <Link to="/productos">
-          <Button variant={"ghost"} className="self-start relative bottom-6">
-            <MdOutlineKeyboardBackspace />
-            Seguir comprando
-          </Button>
+            <Button variant={"ghost"} className="self-start relative bottom-6">
+              <MdOutlineKeyboardBackspace />
+              Seguir comprando
+            </Button>
           </Link>
-          <div className="flex ">
+          <div className="flex w-full justify-between ">
             <span className="!text-sm w-[35%] text-gray-600 text-center !font-semibold">
               Producto
             </span>
-            <span className="!text-sm w-[20%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
               Precio
             </span>
             <span className="!text-sm w-[20%] text-gray-600 text-center !font-semibold">
               Cantidad
             </span>
-            <span className="!text-sm w-[20%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
               Sub Total
             </span>
-            <span className="!text-sm w-[10%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
               Eliminar
             </span>
           </div>
           <div className="flex flex-col gap-4">
             {items.map((item) => (
-              <div className="flex justify-around items-center gap-8 !border rounded-lg !p-4">
-                <Image
-                  objectFit="cover"
-                  maxW="100px"
-                  src={item.imagen}
-                  alt="Caffe Latte"
-                  rounded="lg"
-                />
-                <span className="w-[25%] !text-sm !font-semibold">
-                  {item.nombre}
-                </span>
-                <span className="w-[20%] !text-sm !font-semibold">
+              <div className="flex justify-around items-center !border rounded-lg !p-3">
+                <div className="w-[35%] flex gap-4 items-center ">
+                  <Image
+                    objectFit="cover"
+                    maxW="100px"
+                    src={item.imagen}
+                    alt="Caffe Latte"
+                    rounded="lg"
+                  />
+                  <div className="flex flex-col ">
+                    <span className="w-full !text-sm !font-semibold">
+                      {item.nombre}
+                    </span>
+
+                    <span className="w-full !text-sm !font-semibold">
+                      Talle: {item.talle}
+                    </span>
+                    <span className="w-full !text-sm !font-semibold">
+                      Color: {item.color}
+                    </span>
+                  </div>
+                </div>
+                <span className="w-[15%] !text-sm !font-semibold text-center">
                   $ {item.precio}
                 </span>
-                <div className="w-[20%]">
-                  <div className="flex items-center gap-2 w-24 !border border-gray-400 rounded-3xl !px-1">
+                <div className="w-[20%] flex items-center justify-center">
+                  <div className="flex items-center justify-center gap-2 w-24 !border border-gray-400 rounded-3xl !px-1">
                     <IconButton
                       size={"xs"}
                       variant={"ghost"}
@@ -84,10 +101,10 @@ export default function CheckOut() {
                     </IconButton>
                   </div>
                 </div>
-                <span className="w-[20%] !text-sm !font-semibold">
+                <span className="w-[15%] text-center !text-sm !font-semibold">
                   $ {item.precio * item.cantidad}
                 </span>
-                <div className="flex w-[5%]">
+                <div className="flex w-[13%] justify-center">
                   <IconButton
                     size="xs"
                     onClick={() => eliminarDelCarrito(item.id)}
@@ -100,12 +117,12 @@ export default function CheckOut() {
             ))}
           </div>
         </div>
-        
+
         <div className="flex flex-col w-[35%] relative top-5">
           <div className="!border !w-full rounded-lg">
             <div className="!p-6">
-              <h3 className="text-center !text-lg !font-semibold">
-                Resumen de la compra
+              <h3 className="text-center !text-md !font-semibold">
+                Costos de la compra
               </h3>
             </div>
             <hr />
@@ -115,18 +132,26 @@ export default function CheckOut() {
                 Calcular tiempos y costos de envío
               </span>
             </div>
-            <div className="flex gap-2 !p-4">
-              <Input placeholder="Codigo postal" />
-              <Button variant={"subtle"}>Calcular</Button>
+            <div className="flex flex-col gap-2 !p-4">
+              <div className="flex gap-2">
+                <Input placeholder="Codigo postal" />
+                <Button variant={"subtle"} onClick={handleCalcular}>Calcular</Button>
+              </div>
+              <div className="flex w-full justify-between">
+                <span className="self-end !font-semibold !text-sm">Costo del envío:</span>
+                <span className="self-end !font-semibold !text-sm">$ {costoEnvio}</span>
+              </div>
             </div>
             <hr />
             <div className="flex justify-between gap-2 !p-4">
               <span className="!font-bold">Total</span>
-              <span className="!font-bold">$ {totalPrecio}</span>
+              <span className="!font-bold">$ {totalPrecio + costoEnvio}</span>
             </div>
             <hr />
             <div className="flex flex-col justify-between gap-2 !p-4">
-              <Button>Iniciar pago</Button>
+              <Link to = '/checkout/data'>
+              <Button className="w-full">Iniciar pago</Button>
+              </Link>
               <Link to="/productos">
                 <Button variant={"ghost"} className="w-full">
                   Seguir comprando

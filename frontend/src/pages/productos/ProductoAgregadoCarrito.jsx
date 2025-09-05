@@ -42,7 +42,7 @@ export default function ProductoAgregadoCarrito() {
               <Card.Title mb="0" fontSize={"sm"}>
                 {producto.nombre}
               </Card.Title>
-              <Card.Description>{producto.descripción}</Card.Description>
+              <Card.Description fontSize={"xs"} fontWeight={'semibold'}>Talle: {producto.talle}</Card.Description>
               <HStack mt="2">
                 <Badge>$ {producto.precio}</Badge>
 

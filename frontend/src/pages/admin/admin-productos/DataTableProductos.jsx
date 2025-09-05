@@ -80,24 +80,16 @@ export default function DataTableProductos() {
       </div>
   )
 
-  function MostrarLoading()  {
-    return (
-      <div className="min-w-full min-h-[40vh] flex items-center justify-center gap-2">
-        <Spinner color="colorPalette.600" />
-        <Text color="colorPalette.600" fontWeight={'bold'}>Cargando...</Text>
-      </div>
-    );
-  };
-
   const data = productos;
   return (
-    <div className="flex justify-center ">
+    <div className="flex justify-center">
       <div className="w-[80vw] min-h-full !border">
         <DataTable
           columns={columnas}
           data={productos}
           pagination
           paginationPerPage={15}
+          dense 
           //progressPending={loading}
           //progressComponent={<MostrarLoading />}
         />

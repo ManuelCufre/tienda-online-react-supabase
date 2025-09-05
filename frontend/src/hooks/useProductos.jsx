@@ -7,7 +7,7 @@ const productosKeys = {
   list: (filters) => [...productosKeys.lists(), filters],
   details: () => [...productosKeys.all, "detail"],
   detail: (id) => [...productosKeys.details(), id],
-  activos: () => [...productosKeys.all, "activos"], // ← Key específica para activos
+  activos: () => [...productosKeys.all, "activos"], 
 
 };
 

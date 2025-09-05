@@ -17,14 +17,16 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       const existeProducto = state.items.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === action.payload.id && item.talle === action.payload.talle
       );
+
+      state.items.forEach(item => console.log(item))
 
       if (existeProducto) {
         newState = {
           ...state,
           items: state.items.map((item) =>
-            item.id === action.payload.id
+            item.id === action.payload.id && item.talle === action.payload.talle
               ? { ...item, cantidad: item.cantidad + 1 }
               : item
           ),
@@ -77,7 +79,6 @@ const cartReducer = (state, action) => {
       newState = state;
   }
 
-  // Guardar en localStorage después de cada cambio
   if (typeof window !== "undefined") {
     localStorage.setItem("cart", JSON.stringify(newState));
   }
@@ -89,7 +90,6 @@ export const CartProvider = ({children}) => {
     const [state, dispatch] = useReducer(cartReducer, getInitialCart());
     const [isCarritoOpen, setIsCarritoOpen] = useState(false);
 
-    // Sincronizar cuando cambia el estado
     useEffect(() => {
       localStorage.setItem("cart", JSON.stringify(state));
     }, [state]);
@@ -114,9 +114,11 @@ export const CartProvider = ({children}) => {
         dispatch({type: 'CLEAR_CART'})
     }
 
-    // Calcular totales
     const totalItems = state.items.reduce((sum, item) => sum + item.cantidad, 0)
     const totalPrecio = state.items.reduce((sum, item) => sum + (item.precio * item.cantidad), 0)
+    const costoEnvio = 9800
+    const totalConEnvio = totalPrecio + costoEnvio
+
 
     const value = {
         items: state.items,
@@ -127,8 +129,10 @@ export const CartProvider = ({children}) => {
         vaciarCarrito,
         totalItems,
         totalPrecio,
+        costoEnvio,
+        totalConEnvio,
         isCarritoOpen, 
-        setIsCarritoOpen
+        setIsCarritoOpen,
     }
 
     return (

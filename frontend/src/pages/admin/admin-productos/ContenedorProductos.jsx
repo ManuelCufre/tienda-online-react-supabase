@@ -3,10 +3,12 @@ import CrearProducto from "./CrearProducto";
 import DataTableProductos from "./DataTableProductos";
 export default function ContenedorProductos() {
   return (
-    <div className="flex flex-col w-screen gap-4">
+    <div className="flex flex-col w-screen gap-8 ">
       <HeaderAdmin />
-      <CrearProducto />
+      <div className="flex flex-col w-full gap-3">
+        <CrearProducto />
       <DataTableProductos />
+      </div>
     </div>
   );
 }

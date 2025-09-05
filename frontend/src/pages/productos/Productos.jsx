@@ -57,13 +57,6 @@ export default function Productos() {
             <Card.Footer gap="2">
               <Toaster />
              <AgregarCarrito producto={producto}/>
-              <Link
-                to={`/producto/${producto.id}`}
-                key={producto.id}
-                style={{ textDecoration: "none" }}
-              >
-                <Button variant={"ghost"}>Mas info</Button>
-              </Link>
             </Card.Footer>
           </Card.Root>
         ))}

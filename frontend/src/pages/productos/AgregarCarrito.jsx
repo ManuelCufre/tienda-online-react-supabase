@@ -18,6 +18,7 @@ export default function AgregarCarrito({ producto }) {
     if(!talleSeleccionado){
         return
     }
+    setTalleSeleccionado(null)
     setIsCarritoOpen(true);
     setIsOpen(false); // Cierra el dialog
   };
@@ -82,8 +83,8 @@ export default function AgregarCarrito({ producto }) {
                   Seguir comprando
                 </Button>
               </Dialog.ActionTrigger>
-              <Button isDisabled={!talleSeleccionado} onClick={handleAgregar}>
-                Agregar al carrito
+              <Button disabled= {!talleSeleccionado ? true : false} onClick={handleAgregar}>
+                {talleSeleccionado ? 'Agregar al carrito' : 'Seleccionar talle'}
               </Button>
             </Dialog.Footer>
             <Dialog.CloseTrigger asChild>

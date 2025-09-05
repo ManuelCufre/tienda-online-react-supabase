@@ -80,7 +80,7 @@ export default function Carrito() {
               )}
             </Drawer.Body>
             <Drawer.Footer>
-              <Link to="/pedidos">
+              <Link to="/checkout/cart">
                 <Button>Finalizar compra</Button>
               </Link>
             </Drawer.Footer>
