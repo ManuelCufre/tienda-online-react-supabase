@@ -13,9 +13,7 @@ import {
 import { useForm } from "react-hook-form";
 import { useProductos } from "@/hooks/useProductos";
 import { useState } from "react";
-import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 
 const campos = [
@@ -83,7 +81,6 @@ export default function EditarProducto({ producto }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log("Datos recibidos:", data);
 
       let tallesArray;
 
@@ -105,7 +102,6 @@ export default function EditarProducto({ producto }) {
         activo: estado,
       };
 
-      console.log("Datos a enviar:", { id, datosActualizados });
 
       await modificarProducto({ id, datosActualizados });
       toast.success("Producto modificado con éxito!");
@@ -130,7 +126,7 @@ export default function EditarProducto({ producto }) {
     >
       <Toaster position="bottom-right" reverseOrder={false} />
       <Dialog.Trigger asChild>
-        <IconButton variant={"ghost"} size={"md"}>
+        <IconButton variant={"ghost"} size={"sm"} margin={1}>
           <FaRegEdit />
         </IconButton>
       </Dialog.Trigger>

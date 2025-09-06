@@ -18,13 +18,13 @@ export default function HeaderAdmin() {
                             Productos
                         </Button>
                     </Link>
-                    <Link to="/admin/pedidos">
-                        <Button variant={currentModule === 'pedidos' ? 'solid' : 'ghost'}>
-                            Pedidos
+                    <Link to="/admin/ventas">
+                        <Button variant={currentModule === 'ventas' ? 'surface' : 'ghost'}>
+                            Ventas
                         </Button>
                     </Link>
-                    <Link to="/admin/usuarios">
-                        <Button variant={currentModule === 'usuarios' ? 'solid' : 'ghost'}>
+                    <Link to="/admin/usuarios"> 
+                        <Button variant={currentModule === 'usuarios' ? 'surface' : 'ghost'}>
                             Usuarios
                         </Button>
                     </Link>
