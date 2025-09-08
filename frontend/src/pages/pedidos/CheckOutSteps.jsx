@@ -5,6 +5,7 @@ import ResumenCompra from "./ResumenCompra";
 import FormDatosPersonales from "./FormDatosPersonales";
 import FormEnvio from "./FormEnvio";
 import FormPago from "./FormPago";
+import { useCheckout } from "@/context/CheckoutContext";
 
 const steps = [
   { title: "Datos personales", render: <FormDatosPersonales /> },
@@ -14,6 +15,7 @@ const steps = [
 
 export default function CheckOutSteps() {
   const [activeStep, setActiveStep] = useState(0);
+  const { stepsCompleted, isAllStepsCompleted } = useCheckout();
 
   // Navegación
   const goToNext = () => {
@@ -26,6 +28,12 @@ export default function CheckOutSteps() {
     if (activeStep > 0) {
       setActiveStep(activeStep - 1);
     }
+  };
+
+  // Verificar si el paso actual está completado
+  const isCurrentStepCompleted = () => {
+    const stepKeys = ['personalData', 'shipping', 'payment'];
+    return stepsCompleted[stepKeys[activeStep]] || false;
   };
 
   // Obtener información del paso actual
@@ -69,7 +77,7 @@ export default function CheckOutSteps() {
           </div>
 
           {/* Botones de navegación */}
-          <ButtonGroup size="sm" variant="outline">
+          <ButtonGroup size="sm" variant="outline" className="relative top-16">
             <Button 
               onClick={goToPrevious}
               disabled={activeStep === 0}
@@ -78,7 +86,7 @@ export default function CheckOutSteps() {
             </Button>
             <Button 
               onClick={goToNext}
-              disabled={activeStep === steps.length - 1}
+              disabled={activeStep === steps.length - 1 || !isCurrentStepCompleted()}
             >
               Siguiente
             </Button>

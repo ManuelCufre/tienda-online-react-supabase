@@ -47,7 +47,7 @@ export default function Login() {
         borderRadius="sm"
         bg="white"
       >
-        <h3>Iniciar sesion</h3>
+        <h2 className="!font-semibold self-center !text-xl">Iniciar sesión</h2>
         <Field.Root invalid={!!errors.lastName}>
           <Field.Label>Email</Field.Label>
           <Input type="email" {...register("email")} />
@@ -56,11 +56,11 @@ export default function Login() {
           <Field.Label>Contraseña</Field.Label>
           <PasswordInput type="password" {...register("password")} />
         </Field.Root>
-        <Button type="submit">Iniciar Sesión</Button>
+        <Button type="submit" width={'full'}>Iniciar Sesión</Button>
         <Text color={"red.500"}>{errorLogin}</Text>
         <div className="flex gap-4 items-center">
           <Text textStyle = "sm">¿No tienes una cuenta?</Text>
-          <Button size={'xs'} variant="outline" as={RouterLink} to="/signup">
+          <Button size={'xs'} variant="ghost" as={RouterLink} to="/signup">
             Registrate
           </Button>
         </div>

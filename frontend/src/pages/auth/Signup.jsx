@@ -46,22 +46,24 @@ export default function Signup() {
           borderRadius="sm"
           bg="white"
         >
-          <h3>Registrarse</h3>
+          <h2 className="!font-semibold self-center !text-xl">
+            Registrarse
+          </h2>{" "}
           <Field.Root invalid={!!errors.lastName}>
             <Field.Label>Email</Field.Label>
             <Input type="email" {...register("email")} />
           </Field.Root>
-
           <Field.Root invalid={!!errors.lastName}>
             <Field.Label>Contraseña</Field.Label>
             <PasswordInput type="password" {...register("contraseña")} />
           </Field.Root>
-
-          <Button type="submit">Iniciar Sesión</Button>
+          <Button type="submit" width={"full"}>
+            Crear cuenta
+          </Button>
           <Text color={"red.500"}>{errorSignup}</Text>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center justi">
             <Text textStyle="sm">¿Ya tienes una cuenta?</Text>
-            <Button size={"xs"} variant="outline" as={RouterLink} to="/login">
+            <Button size={"xs"} variant="ghost" as={RouterLink} to="/login">
               Iniciar Sesión
             </Button>
           </div>

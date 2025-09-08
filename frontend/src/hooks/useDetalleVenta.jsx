@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
 import { supabase } from "@/libs/supaBaseCliente";
 
 const detalleVentasKeys = {
@@ -13,7 +13,7 @@ export function useDetalleVenta(ventaId) {
   const queryClient = useQueryClient();
 
   const detalleVentaQuery = useQuery({
-    queryKey: detalleVentasKeys.detail(ventaId), // ✅ Incluir ventaId
+    queryKey: detalleVentasKeys.detail(ventaId), 
     queryFn: async () => {
       let { data, error } = await supabase
         .from("detalle_ventas")
@@ -22,8 +22,9 @@ export function useDetalleVenta(ventaId) {
       if (error) throw error;
       return data;
     },
-    enabled: !!ventaId, // ✅ Solo ejecutar si ventaId existe
+    enabled: !!ventaId,     
   });
+
 
   return {
     detalleVenta: detalleVentaQuery.data || [],

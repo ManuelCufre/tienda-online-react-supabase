@@ -12,9 +12,7 @@ import { FaUser } from "react-icons/fa";
 
 export default function Cliente({ cliente }) {
   const [isOpen, setIsOpen] = useState();
-  if (cliente) {
-    console.log(cliente);
-  }
+  
 
   const datosPersonales = [
     { atributo: "nombre", label: "Nombre" },

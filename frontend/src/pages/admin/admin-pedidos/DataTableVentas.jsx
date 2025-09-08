@@ -1,10 +1,11 @@
 import DataTable from "react-data-table-component";
 import { useVentas } from "@/hooks/useVentas";
 import { IconButton } from "@chakra-ui/react";
-import { Spinner, Text, Flex } from "@chakra-ui/react";
+import { Spinner, Text, Flex, Button } from "@chakra-ui/react";
 import DetalleVenta from "./DetalleVenta";
 import Cliente from "./Cliente";
-
+import { MdOutlineKeyboardBackspace } from "react-icons/md";
+import { Link } from "react-router-dom";
 export default function DataTableVentas() {
 
   const { ventas, loading, error, getVentas, crearVenta } =
@@ -87,7 +88,14 @@ export default function DataTableVentas() {
   const data = ventas;
   return (
     <div className="flex justify-center">
-      <div className="w-[80vw] min-h-full !border">
+      <div className="flex flex-col gap-3">
+      <Link to="/productos">
+          <Button variant={"ghost"}>
+            <MdOutlineKeyboardBackspace />
+            Ir a publicaciones
+          </Button>
+        </Link>
+      <div className="w-[80vw]  !border">
         <DataTable
           columns={columnas}
           data={data}
@@ -95,6 +103,7 @@ export default function DataTableVentas() {
           paginationPerPage={15}
           dense 
         />
+      </div>
       </div>
     </div>
   );

@@ -59,7 +59,7 @@ export default function DataTableProductos() {
     },
     {
       name: "Imagen",
-      selector: (row) => <img src={row.imagen} width={"30px"} />,
+      selector: (row) => <img src={row.imagen} width={"28px"} />,
       maxWidth: "30px",
     },
 

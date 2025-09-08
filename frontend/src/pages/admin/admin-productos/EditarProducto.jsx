@@ -126,7 +126,7 @@ export default function EditarProducto({ producto }) {
     >
       <Toaster position="bottom-right" reverseOrder={false} />
       <Dialog.Trigger asChild>
-        <IconButton variant={"ghost"} size={"sm"} margin={1}>
+        <IconButton variant={"ghost"} size={"xs"} margin={1}>
           <FaRegEdit />
         </IconButton>
       </Dialog.Trigger>

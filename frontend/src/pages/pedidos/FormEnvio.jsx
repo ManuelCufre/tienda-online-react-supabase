@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Box, Field, Input, defineStyle, Grid } from "@chakra-ui/react";
+import { Box, Field, Input, defineStyle, Grid, Button } from "@chakra-ui/react";
+import { useCheckout } from "@/context/CheckoutContext";
 
 export default function FormEnvio() {
+  const [enviado, setEnviado] = useState(false);
+  const { setShippingData } = useCheckout();
+  
   const campos = [
     { label: "Provincia", name: "provincia", type: "text", required: true },
     { label: "Ciudad", name: "ciudad", type: "text", required: true },
     {
       label: "Calle",
-      name: "text",
-      type: "type",
+      name: "calle",
+      type: "text",
       required: true,
     },
     {
@@ -20,7 +24,7 @@ export default function FormEnvio() {
     },
     { label: "Piso/Departamento", name: "piso_departamento", type: "text", },
      { label: "¿Quien recibe el producto?", name: "recibe", type: "text", required: true },
-      { label: "Infomacion adicional", name: "comentario", type: "text",  },
+      { label: "Información adicional", name: "comentario", type: "text",  },
   ];
 
   const {
@@ -31,30 +35,44 @@ export default function FormEnvio() {
   } = useForm();
 
   const onSubmit = async (data) => {
-     console.log(data)
-    };
+    setShippingData(data);
+    setEnviado(true);
+  };
   
 
   return (
-    <div >
-        <form onSubmit={handleSubmit(onSubmit)}>
-      <Grid templateColumns="repeat(2, 1fr)" gap="4" padding={4}>
-        {campos.map((campo) => (
-          <Field.Root>
-            <Box pos="relative" w="full">
-              <Input
-                className="peer"
-                {...register(campo.name, {
-                  required: campo.required,
-                })}
-              />
-              <Field.Label fontSize={"xs"} css={floatingStyles}>
-                {campo.label}
-              </Field.Label>
-            </Box>
-          </Field.Root>
-        ))}
-      </Grid>
+    <div className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8">
+      <h2 className="!font-semibold">Datos de envío</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-full flex flex-col gap-4 items-center relative top-6 ">
+
+        <Grid templateColumns="repeat(2, 1fr)" gap="4" width={'full'} >
+          {campos.map((campo, index) => (
+            <Field.Root key={index}>
+              <Box pos="relative" w="full">
+                <Input
+                  className="peer"
+                  type={campo.type}
+                  {...register(campo.name, {
+                    required: campo.required,
+                  })}
+                />
+                <Field.Label fontSize={"xs"} css={floatingStyles}>
+                  {campo.label}
+                </Field.Label>
+              </Box>
+            </Field.Root>
+          ))}
+        </Grid>
+        
+          <Button 
+            type="submit" 
+            disabled={enviado}
+            width="200px"
+          >
+            {enviado ? "Datos guardados" : "Confirmar envío"}
+          </Button>
+        </div>
       </form>
     </div>
   );

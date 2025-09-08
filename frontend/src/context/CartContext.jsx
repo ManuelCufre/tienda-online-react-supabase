@@ -20,8 +20,6 @@ const cartReducer = (state, action) => {
         (item) => item.id === action.payload.id && item.talle === action.payload.talle
       );
 
-      state.items.forEach(item => console.log(item))
-
       if (existeProducto) {
         newState = {
           ...state,
