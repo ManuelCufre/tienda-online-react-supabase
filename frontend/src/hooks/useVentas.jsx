@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/libs/supaBaseCliente.jsx";
+import { supabase } from "@/libs/supaBaseCliente";
 
 const ventasKeys = {
   all: ["ventas"],

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/libs/supaBaseCliente.jsx";
+import { supabase } from "@/libs/supaBaseCliente";
 
 export function useAuth() {
   const [user, setUser] = useState(null);
