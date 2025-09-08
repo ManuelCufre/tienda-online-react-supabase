@@ -1,5 +1,5 @@
-import { useQuery, useQueryClient, useMutation} from "@tanstack/react-query";
-import { supabase } from "@/libs/supaBaseCliente";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/libs/supaBaseCliente.jsx";
 
 const detalleVentasKeys = {
   all: ["detalleVentas"],
@@ -10,7 +10,6 @@ const detalleVentasKeys = {
 };
 
 export function useDetalleVenta(ventaId) {
-  const queryClient = useQueryClient();
 
   const detalleVentaQuery = useQuery({
     queryKey: detalleVentasKeys.detail(ventaId), 

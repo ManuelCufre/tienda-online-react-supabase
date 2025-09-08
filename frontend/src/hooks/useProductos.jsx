@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/libs/supaBaseCliente";
+import { supabase } from "@/libs/supaBaseCliente.jsx";
 // Queries
 const productosKeys = {
   all: ["productos"],

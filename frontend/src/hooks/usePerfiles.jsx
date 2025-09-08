@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "@/libs/supaBaseCliente";
+import { supabase } from "@/libs/supaBaseCliente.jsx";
 
 export function useProfiles() {
   const getPerfil = (userId) => useQuery({
