@@ -3,6 +3,7 @@ import {
   CloseButton,
   Dialog,
   Portal,
+  Text,
   Image,
   IconButton,
 } from "@chakra-ui/react";
@@ -45,7 +46,7 @@ export default function Cliente({ cliente }) {
           variant={"ghost"} 
           size={"xs"} 
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 text-blue-600 hover:text-blue-700"
+         
         >
           <FaUser />
           Ver cliente
@@ -55,10 +56,10 @@ export default function Cliente({ cliente }) {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content >
-            <Dialog.Header>
+            <Dialog.Header bg={{ base: "white", _dark: "#1A1A1A" }}>
               <h2 className="!text-lg !font-semibold ">Cliente</h2>
             </Dialog.Header>
-            <Dialog.Body className="!pt-2">
+            <Dialog.Body className="!pt-2" bg={{ base: "white", _dark: "#1A1A1A" }}>
               <div className="flex flex-col gap-6">
                 {/* Datos Personales */}
                 <div className=" !p-4 rounded-lg !border border-gray-200 ">
@@ -69,8 +70,8 @@ export default function Cliente({ cliente }) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {datosPersonales.map((dato, index) => (
                       <div key={index} className="flex flex-col">
-                        <span className="!font-semibold text-sm">{dato.label}</span>
-                        <span className="!font-semibold !text-gray-600">{cliente[dato.atributo] || "No especificado"}</span>
+                        <Text className="!font-semibold text-sm">{dato.label}</Text>
+                        <Text className="!font-semibold" color={{ base: "#636363", _dark: "#C4C4C4" }}>{cliente[dato.atributo] || "No especificado"}</Text>
                       </div>
                     ))}
                   </div>
@@ -85,17 +86,17 @@ export default function Cliente({ cliente }) {
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                     {datosEnvio.map((dato, index) => (
                       <div key={index} className="flex flex-col ">
-                        <span className="!font-semibold text-sm">{dato.label}</span>
-                        <span className="!font-semibold !text-gray-600">
+                        <Text className="!font-semibold text-sm">{dato.label}</Text>
+                        <Text className="!font-semibold " color={{ base: "#636363", _dark: "#C4C4C4" }}>
                           {cliente.direcciones?.[0]?.[dato.atributo] || "No especificado"}
-                        </span>
+                        </Text>
                       </div>
                     ))}
                   </div>
                 </div>
               </div>
             </Dialog.Body>
-            <Dialog.Footer>
+            <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
               <Dialog.ActionTrigger asChild>
                 <Button 
                   variant="outline" 

@@ -81,7 +81,6 @@ export default function EditarProducto({ producto }) {
 
   const onSubmit = async (data) => {
     try {
-
       let tallesArray;
 
       if (typeof data.talles_disponibles === "string") {
@@ -101,7 +100,6 @@ export default function EditarProducto({ producto }) {
         talles_disponibles: tallesArray,
         activo: estado,
       };
-
 
       await modificarProducto({ id, datosActualizados });
       toast.success("Producto modificado con éxito!");
@@ -126,7 +124,7 @@ export default function EditarProducto({ producto }) {
     >
       <Toaster position="bottom-right" reverseOrder={false} />
       <Dialog.Trigger asChild>
-        <IconButton variant={"ghost"} size={"xs"} margin={1}>
+        <IconButton size={"xs"} margin={1}>
           <FaRegEdit />
         </IconButton>
       </Dialog.Trigger>
@@ -135,10 +133,10 @@ export default function EditarProducto({ producto }) {
         <Dialog.Positioner>
           <Dialog.Content>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Dialog.Header>
+              <Dialog.Header bg={{ base: "white", _dark: "#1A1A1A" }}>
                 <Dialog.Title>Editar producto</Dialog.Title>
               </Dialog.Header>
-              <Dialog.Body pb="4">
+              <Dialog.Body pb="4" bg={{ base: "white", _dark: "#1A1A1A" }}>
                 <Grid templateColumns="repeat(2, 1fr)" gap="6">
                   {campos.map((campo) => (
                     <Field.Root key={campo.name}>
@@ -202,9 +200,11 @@ export default function EditarProducto({ producto }) {
                   ))}
                 </Grid>
               </Dialog.Body>
-              <Dialog.Footer>
+              <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
                 <Dialog.ActionTrigger asChild>
-                  <Button variant="outline" onClick={handleCerrar}>Cancelar</Button>
+                  <Button variant="outline" onClick={handleCerrar}>
+                    Cancelar
+                  </Button>
                 </Dialog.ActionTrigger>
                 <Button type="submit" isLoading={loading}>
                   {loading ? "Guardando..." : "Aceptar"}

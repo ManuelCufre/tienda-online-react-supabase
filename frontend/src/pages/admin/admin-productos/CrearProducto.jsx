@@ -127,10 +127,10 @@ export default function CrearProducto() {
             <Dialog.Positioner>
               <Dialog.Content>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  <Dialog.Header>
+                  <Dialog.Header bg={{ base: "white", _dark: "#1A1A1A" }}>
                     <Dialog.Title>Crear producto</Dialog.Title>
                   </Dialog.Header>
-                  <Dialog.Body pb="4">
+                  <Dialog.Body pb="4" bg={{ base: "white", _dark: "#1A1A1A" }}>
                     <Grid templateColumns="repeat(2, 1fr)" gap="6">
                       {campos.map((campo) => (
                         <Field.Root key={campo.name}>
@@ -185,7 +185,7 @@ export default function CrearProducto() {
                       ))}
                     </Grid>
                   </Dialog.Body>
-                  <Dialog.Footer>
+                  <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
                     {/* Botón para cerrar el modal */}
                     <Button variant="outline" onClick={handleCerrar}>
                       Cancelar

@@ -4,6 +4,7 @@ import {
   Dialog,
   Portal,
   Image,
+  Box,
   IconButton,
 } from "@chakra-ui/react";
 import { useDetalleVenta } from "@/hooks/useDetalleVenta";
@@ -32,14 +33,15 @@ export default function DetalleVenta({ ventaId }) {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
-            <Dialog.Body className="!pt-4">
+            <Dialog.Body className="!pt-4" bg={{ base: "white", _dark: "#1A1A1A" }}>
               <h1 className="!font-semibold !text-lg">Detalle venta #{ventaId}</h1>
               <div className="flex gap-4">
                 <div className="w-full flex flex-col gap-2 relative top-6">
                   {detalleVenta.map((item) => (
-                    <div
+                    <Box
                       key={item.id}
                       className="flex justify-between !border !p-4 rounded-sm"
+                      bg={{ base: "white", _dark: "#242424" }}
                     >
                       <div className="flex gap-2">
                         <Image
@@ -68,7 +70,7 @@ export default function DetalleVenta({ ventaId }) {
                       <p className="!text-sm !font-semibold">
                         $ {item.cantidad * item.precio_unitario}
                       </p>
-                    </div>
+                    </Box>
                   ))}
                   
                   {/* Total de la venta */}
@@ -81,7 +83,7 @@ export default function DetalleVenta({ ventaId }) {
                 </div>
               </div>
             </Dialog.Body>
-            <Dialog.Footer>
+            <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
               <Dialog.ActionTrigger asChild>
                 <Button variant="outline" onClick={() => setIsOpen(false)}>
                   Cerrar

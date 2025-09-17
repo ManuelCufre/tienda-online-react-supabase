@@ -5,6 +5,7 @@ import {
   Portal,
   EmptyState,
   VStack,
+  Text,
 } from "@chakra-ui/react";
 import { FaShoppingBag } from "react-icons/fa";
 import ProductoAgregadoCarrito from "@/pages/productos/ProductoAgregadoCarrito";
@@ -22,7 +23,8 @@ export default function Carrito() {
 
   return (
     <Drawer.Root
-      size="sm"
+            size={{ base: "md", "2xl": "sm" }}
+
       open={isCarritoOpen}
       onOpenChange={({ open }) => setIsCarritoOpen(open)}
     >
@@ -80,9 +82,13 @@ export default function Carrito() {
               )}
             </Drawer.Body>
             <Drawer.Footer>
-              <Link to="/checkout/cart">
-                <Button>Finalizar compra</Button>
-              </Link>
+              <div className="flex items-center justify-between w-full">
+                <Text fontWeight={'semibold'} fontSize={16}>Precio total: $ {totalPrecio}</Text>
+
+                <Link to="/checkout/cart">
+                  <Button>Finalizar compra</Button>
+                </Link>
+              </div>
             </Drawer.Footer>
             <Drawer.CloseTrigger asChild>
               <CloseButton size="sm" />

@@ -6,6 +6,7 @@ import {
   HStack,
   Image,
   IconButton,
+  Text
 } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
 import { useCart } from "@/context/CartContext";
@@ -14,12 +15,19 @@ import { IoAdd } from "react-icons/io5";
 import { AiOutlineMinus } from "react-icons/ai";
 
 export default function ProductoAgregadoCarrito() {
-  const { items, totalPrecio, eliminarDelCarrito, aumentarCantidadCarrito, decrementarCantidadCarrito, VaciarCarrito } = useCart();
+  const {
+    items,
+    totalPrecio,
+    eliminarDelCarrito,
+    aumentarCantidadCarrito,
+    decrementarCantidadCarrito,
+    VaciarCarrito,
+  } = useCart();
 
   const handleEliminarCarrito = (producto) => {
     eliminarDelCarrito(producto.id);
   };
- 
+
   return (
     <>
       {items.map((producto) => (
@@ -30,6 +38,7 @@ export default function ProductoAgregadoCarrito() {
           maxW="md"
           maxH={"8rem"}
           key={producto.id}
+          bg={{ base: "white", _dark: "#242424" }}
         >
           <Image
             objectFit="cover"
@@ -42,16 +51,30 @@ export default function ProductoAgregadoCarrito() {
               <Card.Title mb="0" fontSize={"sm"}>
                 {producto.nombre}
               </Card.Title>
-              <Card.Description fontSize={"xs"} fontWeight={'semibold'}>Talle: {producto.talle}</Card.Description>
+              <Card.Description fontSize={"xs"} fontWeight={"semibold"}>
+                Talle: {producto.talle}
+              </Card.Description>
               <HStack mt="2">
-                <Badge>$ {producto.precio}</Badge>
+                <Badge >
+                  $ {producto.precio}
+                </Badge>
 
-                <div className=" flex items-center gap-2 !border border-gray-400 rounded-3xl !px-1" >
-                  <IconButton size={'xs'} variant={'ghost'} borderRadius={'2xl'} onClick={()=> decrementarCantidadCarrito(producto.id)}>
+                <div className=" flex items-center gap-2 !border !border-gray-300 rounded-3xl !px-1">
+                  <IconButton
+                    size={"xs"}
+                    variant={"ghost"}
+                    borderRadius={"2xl"}
+                    onClick={() => decrementarCantidadCarrito(producto.id)}
+                  >
                     <AiOutlineMinus />
                   </IconButton>
                   <span>{producto.cantidad}</span>
-                  <IconButton size={'xs'} variant={'ghost'} borderRadius={'2xl'} onClick={()=> aumentarCantidadCarrito(producto.id)}>
+                  <IconButton
+                    size={"xs"}
+                    variant={"ghost"}
+                    borderRadius={"2xl"}
+                    onClick={() => aumentarCantidadCarrito(producto.id)}
+                  >
                     <IoAdd />
                   </IconButton>
                 </div>
@@ -59,7 +82,7 @@ export default function ProductoAgregadoCarrito() {
                 <IconButton
                   size="xs"
                   onClick={() => handleEliminarCarrito(producto)}
-                  variant='subtle'
+                  variant="subtle"
                 >
                   <RiDeleteBin6Line />
                 </IconButton>
@@ -68,7 +91,6 @@ export default function ProductoAgregadoCarrito() {
           </Box>
         </Card.Root>
       ))}
-      <h2 className="precio-total">Precio total: $ {totalPrecio}</h2>
     </>
   );
 }

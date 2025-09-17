@@ -1,7 +1,7 @@
 import { useCart } from "@/context/CartContext";
 import { useCheckout } from "@/context/CheckoutContext";
 import { useVentas } from "@/hooks/useVentas";
-import { Image, Button, Text } from "@chakra-ui/react";
+import { Image, Button, Text, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -73,22 +73,22 @@ export default function ResumenCompra() {
       window.location.href = "/productos";
     } catch (error) {
       console.error("Error al procesar la compra:", error);
-      
+
       // Mostrar mensaje de error más detallado
       let errorMessage = "Error al procesar la compra";
-      
+
       if (error.message) {
         errorMessage += `: ${error.message}`;
       }
-      
+
       if (error.code) {
         errorMessage += ` (Código: ${error.code})`;
       }
-      
+
       if (error.details) {
         errorMessage += ` - ${error.details}`;
       }
-      
+
       toast.error(errorMessage);
     } finally {
       setIsProcessing(false);
@@ -96,7 +96,11 @@ export default function ResumenCompra() {
   };
 
   return (
-    <div className="w-[35%]  !p-3 !border rounded-lg ">
+    <Box
+      className="w-[35%]  !p-3 !border rounded-lg "
+      bg="white"
+      _dark={{ bg: "#1A1A1A" }}
+    >
       <div className="w-full !py-4 flex items-center justify-center !border-b">
         <h2 className="!text-lg !font-bold mb-4">Resumen de Compra</h2>
       </div>
@@ -157,10 +161,12 @@ export default function ResumenCompra() {
           </Text>
         )}
 
-        <Link to="/checkout/cart" >
-          <Button variant={"ghost"} width={'full'}>Volver al carrito</Button>
+        <Link to="/checkout/cart">
+          <Button variant={"ghost"} width={"full"}>
+            Volver al carrito
+          </Button>
         </Link>
       </div>
-    </div>
+    </Box>
   );
 }

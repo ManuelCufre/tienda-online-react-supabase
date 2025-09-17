@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Steps } from "@chakra-ui/react";
+import { Button, ButtonGroup, Steps, Box } from "@chakra-ui/react";
 import { useState } from "react";
 import Header from "@/components/layout/Header";
 import ResumenCompra from "./ResumenCompra";
@@ -52,7 +52,7 @@ export default function CheckOutSteps() {
   const currentStepInfo = getCurrentStepInfo();
 
   return (
-    <div className="flex flex-col items-center">
+    <Box className="flex flex-col items-center min-h-[100vh]" _dark={{ bg: "#080808" }} >
       <Header />
       <div className="w-[65vw] relative top-34 flex gap-8">
         <div className="w-[65%]">
@@ -87,6 +87,7 @@ export default function CheckOutSteps() {
             <Button 
               onClick={goToNext}
               disabled={activeStep === steps.length - 1 || !isCurrentStepCompleted()}
+              variant={'solid'}
             >
               Siguiente
             </Button>
@@ -95,6 +96,6 @@ export default function CheckOutSteps() {
         </div>
         <ResumenCompra />
       </div>
-    </div>
+    </Box>
   );
 }

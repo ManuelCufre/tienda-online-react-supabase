@@ -1,11 +1,11 @@
 import { useCart } from "@/context/CartContext";
 import Header from "@/components/layout/Header";
-import { Image, IconButton, Button } from "@chakra-ui/react";
+import { Image, IconButton, Button, Flex, Box } from "@chakra-ui/react";
 import { IoAdd } from "react-icons/io5";
 import { AiOutlineMinus } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaTruck } from "react-icons/fa";
-import { Input } from "@chakra-ui/react";
+import { Input, } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { useState } from "react";
@@ -18,13 +18,13 @@ export default function CheckOut() {
     decrementarCantidadCarrito,
   } = useCart();
 
-  const [costoEnvio, setCostoEnvio] = useState(0)
+  const [costoEnvio, setCostoEnvio] = useState(0);
 
   const handleCalcular = () => {
-    setCostoEnvio(9800)
+    setCostoEnvio(9800);
   };
   return (
-    <div className="flex flex-col items-center">
+    <Flex className="flex flex-col items-center" bg="white" _dark={{ bg: "#0D0D0D" }} minH={'100vh'}>
       <Header />
       <div className="w-[65vw] flex gap-4  justify-between relative top-44 ">
         <div className="flex flex-col w-[65%] relative bottom-10">
@@ -35,25 +35,27 @@ export default function CheckOut() {
             </Button>
           </Link>
           <div className="flex w-full justify-between ">
-            <span className="!text-sm w-[35%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[35%]  text-center !font-semibold">
               Producto
             </span>
-            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%]  text-center !font-semibold">
               Precio
             </span>
-            <span className="!text-sm w-[20%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[20%]  text-center !font-semibold">
               Cantidad
             </span>
-            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%]  text-center !font-semibold">
               Sub Total
             </span>
-            <span className="!text-sm w-[15%] text-gray-600 text-center !font-semibold">
+            <span className="!text-sm w-[15%]  text-center !font-semibold">
               Eliminar
             </span>
           </div>
           <div className="flex flex-col gap-4">
             {items.map((item) => (
-              <div className="flex justify-around items-center !border rounded-lg !p-3">
+              <Flex className="flex justify-around items-center !border !border-gray-300 rounded-lg !p-3 " bg="white" _dark={{ bg: "#242424", border: "#242424"
+              }}
+             >
                 <div className="w-[35%] flex gap-4 items-center ">
                   <Image
                     objectFit="cover"
@@ -113,19 +115,20 @@ export default function CheckOut() {
                     <RiDeleteBin6Line />
                   </IconButton>
                 </div>
-              </div>
+              </Flex>
             ))}
           </div>
         </div>
 
         <div className="flex flex-col w-[35%] relative top-5">
-          <div className="!border !w-full rounded-lg">
+          <Box className="!border !border-gray-300 !w-full rounded-lg" bg="white" _dark={{ bg: "#242424", border: "#242424"
+              }}>
             <div className="!p-6">
               <h3 className="text-center !text-md !font-semibold">
                 Costos de la compra
               </h3>
             </div>
-            <hr />
+            <div className="!bg-gray-300 h-[1px] w-full"></div>
             <div className="!p-4 flex items-center gap-2">
               <FaTruck />
               <span className="!text-sm text-center !font-semibold">
@@ -134,33 +137,41 @@ export default function CheckOut() {
             </div>
             <div className="flex flex-col gap-2 !p-4">
               <div className="flex gap-2">
-                <Input placeholder="Codigo postal" />
-                <Button variant={"subtle"} onClick={handleCalcular}>Calcular</Button>
+                <Input placeholder="Codigo postal" color={"gray.100"} />
+                <Button variant={"subtle"} onClick={handleCalcular}>
+                  Calcular
+                </Button>
               </div>
               <div className="flex w-full justify-between">
-                <span className="self-end !font-semibold !text-sm">Costo del envío:</span>
-                <span className="self-end !font-semibold !text-sm">$ {costoEnvio}</span>
+                <span className="self-end !font-semibold !text-sm">
+                  Costo del envío:
+                </span>
+                <span className="self-end !font-semibold !text-sm">
+                  $ {costoEnvio}
+                </span>
               </div>
             </div>
-            <hr />
+            <div className="!bg-gray-300 h-[1px] w-full"></div>
             <div className="flex justify-between gap-2 !p-4">
               <span className="!font-bold">Total</span>
               <span className="!font-bold">$ {totalPrecio + costoEnvio}</span>
             </div>
-            <hr />
+            <div className="!bg-gray-300 h-[1px] w-full"></div>
             <div className="flex flex-col justify-between gap-2 !p-4">
-              <Link to = '/checkout/data'>
-              <Button className="w-full">Iniciar pago</Button>
+              <Link to="/checkout/data">
+                <Button variant={'solid'} width={'full'}>
+                  Iniciar pago
+                </Button>
               </Link>
               <Link to="/productos">
-                <Button variant={"ghost"} className="w-full">
+                <Button variant={'subtle'} width={'full'}>
                   Seguir comprando
                 </Button>
               </Link>
             </div>
-          </div>
+          </Box>
         </div>
       </div>
-    </div>
+    </Flex>
   );
 }

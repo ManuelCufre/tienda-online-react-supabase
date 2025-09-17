@@ -41,7 +41,8 @@ export default function FormEnvio() {
   
 
   return (
-    <div className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8">
+    <Box className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8" bg="white"
+      _dark={{ bg: "#1A1A1A" }}>
       <h2 className="!font-semibold">Datos de envío</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
       <div className="w-full flex flex-col gap-4 items-center relative top-6 ">
@@ -74,7 +75,7 @@ export default function FormEnvio() {
           </Button>
         </div>
       </form>
-    </div>
+    </Box>
   );
 }
 

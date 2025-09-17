@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Box } from "@chakra-ui/react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function HeaderAdmin() {
@@ -9,8 +9,8 @@ export default function HeaderAdmin() {
     const currentModule = currentPath.split('/').pop(); // "productos"
 
     return (
-        <div className="w-screen !shadow-sm h-16 flex items-center justify-center">
-            <div className="flex w-[80vw] justify-between items-center">
+        <Box className="w-screen !shadow-sm h-16 flex items-center justify-center" bg="white" _dark={{ bg: "#121212" }}>
+            <Box className="flex w-[80vw] justify-between items-center">
                 <h1 className="!font-semibold">Panel administrador</h1>
                 <div className="flex gap-2">
                     <Link to="/admin/productos">
@@ -24,7 +24,7 @@ export default function HeaderAdmin() {
                         </Button>
                     </Link>
                 </div>
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

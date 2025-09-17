@@ -31,7 +31,8 @@ export default function FormaPago() {
   };
 
   return (
-    <div className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8">
+    <Box className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8" bg="white"
+      _dark={{ bg: "#1A1A1A" }}>
       <h2 className="!font-semibold">Pago</h2>
       
       <div className="!pt-4 !pb-4">
@@ -113,7 +114,7 @@ export default function FormaPago() {
           </Button>
         </div>
       </form>
-    </div>
+    </Box>
   );
 }
 

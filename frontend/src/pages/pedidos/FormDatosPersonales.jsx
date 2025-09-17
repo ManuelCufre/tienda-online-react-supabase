@@ -4,9 +4,9 @@ import { Box, Field, Input, defineStyle, Grid, Button } from "@chakra-ui/react";
 import { useCheckout } from "@/context/CheckoutContext";
 
 export default function FormDatosPersonales() {
-  const [enviado, setEnviado] = useState(false)
+  const [enviado, setEnviado] = useState(false);
   const { setPersonalData, stepsCompleted } = useCheckout();
-  
+
   const campos = [
     { label: "Nombre", name: "nombre", type: "text", required: true },
     { label: "Apellido", name: "apellido", type: "text", required: true },
@@ -39,12 +39,15 @@ export default function FormDatosPersonales() {
   };
 
   return (
-    <div className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8">
+    <Box
+      className="!pt-8 !px-4 !pb-16 !border rounded-md relative top-8"
+      bg="white"
+      _dark={{ bg: "#1A1A1A" }}
+    >
       <h2 className="!font-semibold">Datos personales</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        
         <div className="w-full flex flex-col gap-4 items-center relative top-6 ">
-          <Grid templateColumns="repeat(2, 1fr)" gap="4" width={'full'}>
+          <Grid templateColumns="repeat(2, 1fr)" gap="4" width={"full"}>
             {campos.map((campo) => (
               <Field.Root>
                 <Box pos="relative" w="full">
@@ -57,17 +60,19 @@ export default function FormDatosPersonales() {
                       required: campo.required,
                     })}
                   />
-                  <Field.Label fontSize={"xs"} css={floatingStyles}>
+                  <Field.Label fontSize={"xs"} css={floatingStyles} >
                     {campo.label}
                   </Field.Label>
                 </Box>
               </Field.Root>
             ))}
           </Grid>
-          <Button width={60} type="submit" disabled={enviado ? true : false}>Enviar</Button>
+          <Button width={60} type="submit" disabled={enviado ? true : false}>
+            Enviar
+          </Button>
         </div>
       </form>
-    </div>
+    </Box>
   );
 }
 

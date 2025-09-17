@@ -1,4 +1,4 @@
-import { Button, Card, Image, Text, Center, Spinner } from "@chakra-ui/react";
+import { Button, Card, Image, Text, Center, Spinner, Box, Grid } from "@chakra-ui/react";
 import { Toaster, toaster } from "@/components/ui/toaster";
 import { useState, useEffect } from "react";
 import Header from "@/components/layout/Header";
@@ -6,6 +6,8 @@ import { useCart } from "@/context/CartContext";
 import { Link } from "react-router-dom";
 import AgregarCarrito from "./AgregarCarrito";
 import { useProductos } from "@/hooks/useProductos";
+import Footer from "@/components/layout/Footer";
+
 
 export default function Productos() {
   const { productos, loading, error, productosActivos } = useProductos();
@@ -15,7 +17,6 @@ export default function Productos() {
     agregarAlCarrito(producto);
   };
 
-  
   if (loading)
     return (
       <Center h="100vh" flexDirection="column" gap={4}>
@@ -24,7 +25,7 @@ export default function Productos() {
       </Center>
     );
 
-     if (error)
+  if (error)
     return (
       <Center h="100vh" flexDirection="column" gap={4}>
         <span>{error}</span>
@@ -32,36 +33,37 @@ export default function Productos() {
     );
 
   return (
-    <div className="flex flex-col items-center max-w-[100vw] ">
+    <Box className="flex flex-col items-center max-w-[100vw] gap-48" bg="white" _dark={{ bg: "#1A1A1A" }}>
       <Header />
-      <div className="max-w-[65vw] flex  justify-center relative top-34">
-        <div className="grid grid-cols-4 gap-4 ">
-        {productosActivos.map((producto) => (
-          <Card.Root maxW="xs" overflow="hidden" key={producto.id}>
-            <Image
-              src={producto.imagen}
-              alt="Green double couch with wooden legs"
-            />
-            <Card.Body gap="2">
-              <Card.Title>{producto.nombre}</Card.Title>
-              <Card.Description>{producto.descripcion}</Card.Description>
-              <Text
-                textStyle="2xl"
-                fontWeight="medium"
-                letterSpacing="tight"
-                mt="2"
-              >
-                ${producto.precio}
-              </Text>
-            </Card.Body>
-            <Card.Footer gap="2">
-              <Toaster />
-             <AgregarCarrito producto={producto}/>
-            </Card.Footer>
-          </Card.Root>
-        ))}
-      </div>
-      </div>
-    </div>
+      <Box className=" flex  justify-center relative top-34" maxW={{base:'90vw', lg:'65vw'}}>
+        <Grid className="grid gap-4 " templateColumns={{ base : "repeat(1)", md: "repeat(3, 1fr)", lg: "repeat(4, 1fr)"}}>
+          {productosActivos.map((producto) => (
+            <Card.Root maxW="xs" overflow="hidden" key={producto.id} bg={{ base: "white", _dark: "#242424" }}>
+              <Image
+                src={producto.imagen}
+                alt="Green double couch with wooden legs"
+              />
+              <Card.Body gap="2">
+                <Card.Title fontSize={{  xl: "lg"}}>{producto.nombre}</Card.Title>
+                <Card.Description fontSize={{  xl: "sm"}}>{producto.descripcion}</Card.Description>
+                <Text
+                  fontWeight="medium"
+                  letterSpacing="tight"
+                  mt="2"
+                  fontSize={ "lg"}
+                >
+                  ${producto.precio}
+                </Text>
+              </Card.Body>
+              <Card.Footer gap="2">
+                <Toaster />
+               <AgregarCarrito producto={producto}/>
+              </Card.Footer>
+            </Card.Root>
+          ))}
+        </Grid>
+      </Box>
+      <Footer />
+    </Box>
   );
 }

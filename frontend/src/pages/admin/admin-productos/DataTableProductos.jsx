@@ -73,6 +73,8 @@ export default function DataTableProductos() {
     },
   ];
 
+  
+
   if(loading) return (
       <div className="min-w-full h-[50vh] flex items-center justify-center gap-2">
         <Spinner color="colorPalette.600" />
@@ -83,7 +85,7 @@ export default function DataTableProductos() {
   const data = productos;
   return (
     <div className="flex justify-center">
-      <div className="w-[80vw] min-h-full !border">
+      <div className="w-[80vw] min-h-full !border" >
         <DataTable
           columns={columnas}
           data={productos}
