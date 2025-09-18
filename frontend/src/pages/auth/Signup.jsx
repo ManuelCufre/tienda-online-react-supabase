@@ -1,4 +1,4 @@
-import { Button, Field, Input, Stack, Text } from "@chakra-ui/react";
+import { Button, Field, Input, Stack, Text, Box } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/hooks/useAuth";
@@ -34,7 +34,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
+    <Box className="flex justify-center items-center h-screen " bg="white" _dark={{ bg: "#1A1A1A" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack
           gap="4"
@@ -44,7 +44,7 @@ export default function Signup() {
           shadow="sm"
           p="8"
           borderRadius="sm"
-          bg="white"
+           bg="white" _dark={{ bg: "#303030" }}
         >
           <h2 className="!font-semibold self-center !text-xl">
             Registrarse
@@ -69,6 +69,6 @@ export default function Signup() {
           </div>
         </Stack>
       </form>
-    </div>
+    </Box>
   );
 }
