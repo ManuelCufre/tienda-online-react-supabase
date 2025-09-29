@@ -19,7 +19,6 @@ createRoot(document.getElementById("root")).render(
           <CartProvider>
             <Provider>
               <App />
-              <ReactQueryDevtools initialIsOpen={false} />
             </Provider>
           </CartProvider>
         </ColorModeProvider>

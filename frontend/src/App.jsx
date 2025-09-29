@@ -6,7 +6,7 @@ import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import CheckOut from "./pages/pedidos/CheckOut";
 import { BrowserRouter } from "react-router";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { CheckoutProvider } from "./context/CheckoutContext";
 
 import "./App.css";
@@ -16,6 +16,8 @@ function App() {
     <BrowserRouter>
       <CheckoutProvider>
         <Routes>
+                    <Route path="/" element={<Navigate to="/productos" replace />} /> {/* ← Agrega esto */}
+
           <Route path="/productos" element={<Productos />} />
           <Route path="/admin/productos" element={<ContenedorProductos />} />
           <Route path="/admin/ventas" element={<ContenedorVentas />} />

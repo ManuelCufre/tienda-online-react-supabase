@@ -23,8 +23,7 @@ export default function Carrito() {
 
   return (
     <Drawer.Root
-            size={{ base: "md", "2xl": "sm" }}
-
+      size={{ base: "sm", md: 'xs', "lg": "sm" }}
       open={isCarritoOpen}
       onOpenChange={({ open }) => setIsCarritoOpen(open)}
     >
@@ -83,10 +82,12 @@ export default function Carrito() {
             </Drawer.Body>
             <Drawer.Footer>
               <div className="flex items-center justify-between w-full">
-                <Text fontWeight={'semibold'} fontSize={16}>Precio total: $ {totalPrecio}</Text>
+                <Text fontWeight={"semibold"} fontSize={{base: "sm", md: 'sm', "lg": "md", "2xl": "md"}}>
+                  Precio total: $ {totalPrecio}
+                </Text>
 
                 <Link to="/checkout/cart">
-                  <Button>Finalizar compra</Button>
+                  <Button size={{base: "sm", md: 'sm', "lg": "md", "2xl": "md"}}>Finalizar compra</Button>
                 </Link>
               </div>
             </Drawer.Footer>

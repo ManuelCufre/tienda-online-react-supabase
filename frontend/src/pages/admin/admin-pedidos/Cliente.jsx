@@ -10,6 +10,7 @@ import {
 import { toast } from "react-hot-toast";
 import { useState } from "react";
 import { FaUser } from "react-icons/fa";
+import { FaTruck } from "react-icons/fa";
 
 export default function Cliente({ cliente }) {
   const [isOpen, setIsOpen] = useState();
@@ -43,7 +44,7 @@ export default function Cliente({ cliente }) {
       <Dialog.Trigger asChild>
         <Button 
         margin={1}
-          variant={"ghost"} 
+          variant={"subtle"} 
           size={"xs"} 
           onClick={() => setIsOpen(true)}
          
@@ -80,7 +81,7 @@ export default function Cliente({ cliente }) {
                 {/* Datos de Envío */}
                 <div className="!p-4 rounded-lg !border border-gray-200">
                   <h3 className="!font-semibold !text-MD  !mb-4 flex items-center gap-2">
-                    <FaUser  />
+                    <FaTruck  />
                     Datos de Envío
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -99,7 +100,7 @@ export default function Cliente({ cliente }) {
             <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
               <Dialog.ActionTrigger asChild>
                 <Button 
-                  variant="outline" 
+                  variant="solid" 
                   onClick={() => setIsOpen(false)}
                   className="text-gray-600 hover:text-gray-700"
                 >

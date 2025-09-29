@@ -6,13 +6,13 @@ import { FaUserCircle } from "react-icons/fa";
 import { useState } from "react";
 import MenuDeUsuario from "./MenuDeUsuario";
 import { ColorModeButton } from "@/components/ui/color-mode";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 export default function Header() {
   const { user } = useAuth();
 
   return (
     <Flex className="w-full h-20 !shadow-sm flex items-center justify-center fixed z-1000 " bg={{ base: "white", _dark: "#121212" }}>
-      <div className="flex items-center justify-between w-[65vw] z-1000">
+      <Box className="flex items-center justify-between  z-1000" width={{base: '95%', md: '75vw', lg: '75vw', xl: '70vw', "2xl": '65vw'}}>
         <div className="">
           <h1 className="!font-bold ">Tienda online</h1>
         </div>
@@ -30,13 +30,13 @@ export default function Header() {
                 <Button variant={"outline"}>Iniciar Sesión</Button>
               </NavLink>
 
-              <NavLink to="/login">
+              <NavLink to="/signup">
                 <Button>Registrarse</Button>
               </NavLink>
             </div>
           )}
         </div>
-      </div>
+      </Box>
     </Flex>
   );
 }

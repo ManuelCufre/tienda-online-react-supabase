@@ -43,19 +43,19 @@ export default function Productos() {
                 src={producto.imagen}
                 alt="Green double couch with wooden legs"
               />
-              <Card.Body gap="2">
-                <Card.Title fontSize={{  xl: "lg"}}>{producto.nombre}</Card.Title>
-                <Card.Description fontSize={{  xl: "sm"}}>{producto.descripcion}</Card.Description>
+              <Card.Body gap={{ base: 1, xl: 2}}>
+                <Card.Title fontSize={{ md:"md", xl: "lg"}}>{producto.nombre}</Card.Title>
+                <Card.Description fontSize={{   md:"xs", xl: "sm"}}>{producto.descripcion}</Card.Description>
                 <Text
                   fontWeight="medium"
                   letterSpacing="tight"
                   mt="2"
-                  fontSize={ "lg"}
+                  fontSize={ {base: "lg",md:"md", lg:"lg"}}
                 >
                   ${producto.precio}
                 </Text>
               </Card.Body>
-              <Card.Footer gap="2">
+              <Card.Footer gap={{ base: 1, xl: 2}}>
                 <Toaster />
                <AgregarCarrito producto={producto}/>
               </Card.Footer>

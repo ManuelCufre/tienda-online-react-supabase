@@ -25,7 +25,7 @@ export default function DetalleVenta({ ventaId }) {
       onOpenChange={({ open }) => setIsOpen(open)}
     >
       <Dialog.Trigger asChild>
-        <Button variant={'ghost'} size={'xs'} onClick={() => setIsOpen(true)}>
+        <Button variant={'subtle'} size={'xs'} onClick={() => setIsOpen(true)}>
           <FaEye /> Ver productos
         </Button>
       </Dialog.Trigger>
@@ -85,7 +85,7 @@ export default function DetalleVenta({ ventaId }) {
             </Dialog.Body>
             <Dialog.Footer bg={{ base: "white", _dark: "#1A1A1A" }}>
               <Dialog.ActionTrigger asChild>
-                <Button variant="outline" onClick={() => setIsOpen(false)}>
+                <Button variant="solid" onClick={() => setIsOpen(false)}>
                   Cerrar
                 </Button>
               </Dialog.ActionTrigger>

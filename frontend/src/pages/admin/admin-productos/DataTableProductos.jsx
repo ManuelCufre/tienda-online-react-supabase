@@ -3,6 +3,14 @@ import { useProductos } from "@/hooks/useProductos";
 import { IconButton } from "@chakra-ui/react";
 import { Spinner, Text, Flex } from "@chakra-ui/react";
 import EditarProducto from "./EditarProducto";
+import {
+  ColorModeButton,
+  DarkMode,
+  LightMode,
+  useColorMode,
+  useColorModeValue,
+} from "@/components/ui/color-mode"
+
 export default function DataTableProductos() {
   const { productos, loading, error, getProductos, crearProducto } =
     useProductos();
@@ -73,7 +81,35 @@ export default function DataTableProductos() {
     },
   ];
 
-  
+    const { colorMode } = useColorMode()
+  const customStyles = {
+    table: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#000" : "#fff",
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#1A1A1A" : "#fff",
+        color:  colorMode === "dark" ? "#FFF" : "#000",
+        fontWeight: "bold",
+      },
+    },
+    rows: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#292929" : "#fff",
+        color: colorMode === "dark" ? "#fff" : "#2d3748",
+      }
+     
+    },
+    pagination: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#242424" : "#fff",
+        color: colorMode === "dark" ? "#fff" : "#2d3748",
+      },
+    },
+  };
+    
 
   if(loading) return (
       <div className="min-w-full h-[50vh] flex items-center justify-center gap-2">
@@ -84,7 +120,7 @@ export default function DataTableProductos() {
 
   const data = productos;
   return (
-    <div className="flex justify-center">
+   <div className="flex justify-center">
       <div className="w-[80vw] min-h-full !border" >
         <DataTable
           columns={columnas}
@@ -92,8 +128,7 @@ export default function DataTableProductos() {
           pagination
           paginationPerPage={15}
           dense 
-          //progressPending={loading}
-          //progressComponent={<MostrarLoading />}
+          customStyles={customStyles} // ← agrega esto
         />
       </div>
     </div>

@@ -106,14 +106,14 @@ export default function CrearProducto() {
       <Toaster position="bottom-right" reverseOrder={false} />
       <div className="w-[80vw] flex justify-between items-center">
         <Link to="/productos">
-          <Button variant={"ghost"}>
+          <Button variant={"subtle"}>
             <MdOutlineKeyboardBackspace />
             Ir a publicaciones
           </Button>
         </Link>
 
         {/* Botón para abrir el modal */}
-        <Button onClick={() => setIsOpen(true)}>Nuevo producto</Button>
+        <Button onClick={() => setIsOpen(true)} variant={'subtle'}>Nuevo producto</Button>
 
         {/* Modal controlado por el estado isOpen */}
         <Dialog.Root

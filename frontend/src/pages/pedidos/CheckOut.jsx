@@ -19,6 +19,7 @@ export default function CheckOut() {
   } = useCart();
 
   const [costoEnvio, setCostoEnvio] = useState(0);
+  
 
   const handleCalcular = () => {
     setCostoEnvio(9800);
@@ -26,8 +27,8 @@ export default function CheckOut() {
   return (
     <Flex className="flex flex-col items-center" bg="white" _dark={{ bg: "#0D0D0D" }} minH={'100vh'}>
       <Header />
-      <div className="w-[65vw] flex gap-4  justify-between relative top-44 ">
-        <div className="flex flex-col w-[65%] relative bottom-10">
+      <Box className=" flex gap-4  justify-between relative top-44 " width={{base:'95vw', lg:'65vw'}} flexDirection={{base: 'column', md: 'row'}}>
+        <Box className="flex flex-col relative bottom-10" width={{base: '100%', md: '65%'}}>
           <Link to="/productos">
             <Button variant={"ghost"} className="self-start relative bottom-6">
               <MdOutlineKeyboardBackspace />
@@ -35,19 +36,19 @@ export default function CheckOut() {
             </Button>
           </Link>
           <div className="flex w-full justify-between ">
-            <span className="!text-sm w-[35%]  text-center !font-semibold">
+            <span className="!text-xs w-[35%]  text-center !font-semibold">
               Producto
             </span>
-            <span className="!text-sm w-[15%]  text-center !font-semibold">
+            <span className="!text-xs w-[15%]  text-center !font-semibold">
               Precio
             </span>
-            <span className="!text-sm w-[20%]  text-center !font-semibold">
+            <span className="!text-xs w-[20%]  text-center !font-semibold">
               Cantidad
             </span>
-            <span className="!text-sm w-[15%]  text-center !font-semibold">
+            <span className="!text-xs w-[15%]  text-center !font-semibold">
               Sub Total
             </span>
-            <span className="!text-sm w-[15%]  text-center !font-semibold">
+            <span className="!text-xs w-[15%]  text-center !font-semibold">
               Eliminar
             </span>
           </div>
@@ -56,7 +57,7 @@ export default function CheckOut() {
               <Flex className="flex justify-around items-center !border !border-gray-300 rounded-lg !p-3 " bg="white" _dark={{ bg: "#242424", border: "#242424"
               }}
              >
-                <div className="w-[35%] flex gap-4 items-center ">
+                <Box className="w-[35%] flex gap-4 items-center ">
                   <Image
                     objectFit="cover"
                     maxW="100px"
@@ -65,19 +66,19 @@ export default function CheckOut() {
                     rounded="lg"
                   />
                   <div className="flex flex-col ">
-                    <span className="w-full !text-sm !font-semibold">
+                    <span className="w-full !text-xs !font-semibold">
                       {item.nombre}
                     </span>
 
-                    <span className="w-full !text-sm !font-semibold">
+                    <span className="w-full !text-xs !font-semibold">
                       Talle: {item.talle}
                     </span>
-                    <span className="w-full !text-sm !font-semibold">
+                    <span className="w-full !text-xs !font-semibold">
                       Color: {item.color}
                     </span>
                   </div>
-                </div>
-                <span className="w-[15%] !text-sm !font-semibold text-center">
+                </Box>
+                <span className="w-[15%] !text-xs !font-semibold text-center">
                   $ {item.precio}
                 </span>
                 <div className="w-[20%] flex items-center justify-center">
@@ -118,9 +119,9 @@ export default function CheckOut() {
               </Flex>
             ))}
           </div>
-        </div>
+        </Box>
 
-        <div className="flex flex-col w-[35%] relative top-5">
+        <Box className="flex flex-col relative top-5" width={{base: '100%', md: '35%'}}>
           <Box className="!border !border-gray-300 !w-full rounded-lg" bg="white" _dark={{ bg: "#242424", border: "#242424"
               }}>
             <div className="!p-6">
@@ -137,7 +138,7 @@ export default function CheckOut() {
             </div>
             <div className="flex flex-col gap-2 !p-4">
               <div className="flex gap-2">
-                <Input placeholder="Codigo postal" color={"gray.100"} />
+                <Input placeholder="Codigo postal"  />
                 <Button variant={"subtle"} onClick={handleCalcular}>
                   Calcular
                 </Button>
@@ -170,8 +171,8 @@ export default function CheckOut() {
               </Link>
             </div>
           </Box>
-        </div>
-      </div>
+        </Box>
+      </Box>
     </Flex>
   );
 }

@@ -69,7 +69,7 @@ export default function AgregarCarrito({ producto }) {
                     {producto.nombre}
                   </Text>
                   <Text
-                    className=" !font-semibold text-gray-600"
+                    className=" !font-semibold"
                     fontSize={{ base: "sm", xl: "md", "2xl": "lg" }}
                   >
                     {producto.descripcion}
@@ -97,13 +97,13 @@ export default function AgregarCarrito({ producto }) {
                     ))}
                   </div>
                   <div className="!bg-gray-400 h-[1px] w-full"></div>
-                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm", "2xl": "md" }}>
+                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm" }}>
                     Marca: {producto.marca}
                   </Text>
-                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm", "2xl": "md" }}>
+                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm" }}>
                     Color: {producto.color}
                   </Text>
-                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm", "2xl": "md" }}>
+                  <Text className="!font-semibold" fontSize={{ base: "xs", xl: "sm" }}>
                     Género: {producto.genero}
                   </Text>
                 </Box>

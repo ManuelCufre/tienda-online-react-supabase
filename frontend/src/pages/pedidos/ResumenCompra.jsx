@@ -97,9 +97,11 @@ export default function ResumenCompra() {
 
   return (
     <Box
-      className="w-[35%]  !p-3 !border rounded-lg "
+      className="w-[35%] relative !p-3 !border rounded-lg self-center"
       bg="white"
       _dark={{ bg: "#1A1A1A" }}
+      width={{base: '95%', md: '35%'}}
+      top={{base: '16',md:0}}
     >
       <div className="w-full !py-4 flex items-center justify-center !border-b">
         <h2 className="!text-lg !font-bold mb-4">Resumen de Compra</h2>

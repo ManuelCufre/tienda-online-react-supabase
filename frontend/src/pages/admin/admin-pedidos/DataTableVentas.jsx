@@ -6,27 +6,26 @@ import DetalleVenta from "./DetalleVenta";
 import Cliente from "./Cliente";
 import { MdOutlineKeyboardBackspace } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useColorMode } from "@/components/ui/color-mode";
 export default function DataTableVentas() {
-
-  const { ventas, loading, error, getVentas, crearVenta } =
-    useVentas();
+  const { ventas, loading, error, getVentas, crearVenta } = useVentas();
 
   const columnas = [
-    { name: "Id", selector: (row) => row.id, sortable: true, maxWidth: "8px" },
+    { name: "Id", selector: (row) => row.id, sortable: true, maxWidth: "80px" },
     {
-      name: "Nombre del cliente",
+      name: "Nombre",
       selector: (row) => row.clientes.nombre,
       sortable: true,
       maxWidth: "150px",
     },
     {
-      name: "Apellido del cliente",
+      name: "Apellido",
       selector: (row) => row.clientes.apellido,
       sortable: true,
       maxWidth: "150px",
     },
     {
-      name: "Email del cliente",
+      name: "Email",
       selector: (row) => row.clientes.email,
       sortable: true,
       maxWidth: "150px",
@@ -38,16 +37,16 @@ export default function DataTableVentas() {
       maxWidth: "280px",
     },
     {
-      name: "Numero de comprobante",
+      name: "N° comprobante",
       selector: (row) => row.numero_comprobante,
       sortable: true,
-      maxWidth: "40px",
+      maxWidth: "200px",
     },
     {
       name: "Fecha",
-      selector: (row) => row.fecha,
+  selector: (row) => new Date(row.fecha).toLocaleDateString("es-AR"), // o "en-CA" para formato YYYY-MM-DD
       sortable: true,
-      maxWidth: "40px",
+      maxWidth: "140px",
     },
     {
       name: "Total",
@@ -63,47 +62,73 @@ export default function DataTableVentas() {
     },
     {
       name: "Cliente",
-      selector: (row) => (
-        <Cliente cliente={row.clientes}/>
-      ),
-
+      selector: (row) => <Cliente cliente={row.clientes} />,
     },
     {
       name: "Detalle",
-      selector: (row) => (
-        <DetalleVenta ventaId={row.id}/>
-      ),
-
+      selector: (row) => <DetalleVenta ventaId={row.id} />,
     },
-   
   ];
 
-  if(loading) return (
+  if (loading)
+    return (
       <div className="min-w-full h-[50vh] flex items-center justify-center gap-2">
         <Spinner color="colorPalette.600" />
-        <Text color="colorPalette.600" fontWeight={'bold'}>Cargando...</Text>
+        <Text color="colorPalette.600" fontWeight={"bold"}>
+          Cargando...
+        </Text>
       </div>
-  )
+    );
+
+  const { colorMode } = useColorMode();
+
+  const customStyles = {
+    table: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#000" : "#fff",
+      },
+    },
+    headRow: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#1A1A1A" : "#fff",
+        color: colorMode === "dark" ? "#FFF" : "#000",
+        fontWeight: "bold",
+      },
+    },
+    rows: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#292929" : "#fff",
+        color: colorMode === "dark" ? "#fff" : "#2d3748",
+      },
+    },
+    pagination: {
+      style: {
+        backgroundColor: colorMode === "dark" ? "#242424" : "#fff",
+        color: colorMode === "dark" ? "#fff" : "#2d3748",
+      },
+    },
+  };
 
   const data = ventas;
   return (
     <div className="flex justify-center">
       <div className="flex flex-col gap-3">
-      <Link to="/productos">
-          <Button variant={"ghost"}>
+        <Link to="/productos">
+          <Button variant={"subtle"}>
             <MdOutlineKeyboardBackspace />
             Ir a publicaciones
           </Button>
         </Link>
-      <div className="w-[80vw]  !border">
-        <DataTable
-          columns={columnas}
-          data={data}
-          pagination
-          paginationPerPage={15}
-          dense 
-        />
-      </div>
+        <div className="w-[80vw]  !border">
+          <DataTable
+            columns={columnas}
+            data={data}
+            pagination
+            paginationPerPage={15}
+            customStyles={customStyles}
+            dense
+          />
+        </div>
       </div>
     </div>
   );

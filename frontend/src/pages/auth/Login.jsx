@@ -35,7 +35,7 @@ export default function Login() {
   };
 
   return (
-    <Box className="flex justify-center items-center h-screen"  bg="white" _dark={{ bg: "#1A1A1A" }}>
+    <Box className="flex justify-center items-center h-screen"  bg="#F0F0F0" _dark={{ bg: "#1A1A1A" }}>
       <form onSubmit={handleSubmit(onSubmit)}>
       <Stack
         gap="4"
